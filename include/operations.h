@@ -1,8 +1,9 @@
 #ifndef operations_h
 #define operations_h
 
+#include "../include/struct.h"
 using namespace std;
-
+ 
 void load_user_from_csv(vector<User>& users_list);
 
 void load_unit_from_csv(vector<Unit>& units_list);

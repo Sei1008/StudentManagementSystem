@@ -29,8 +29,8 @@ struct Enrollment{
     int score;
 };
 
-vector<User> users_list;
-vector<Unit> units_list;
-vector<Enrollment> enrollments_list;
+extern vector<User> users_list;
+extern vector<Unit> units_list;
+extern vector<Enrollment> enrollments_list;
 
 #endif
