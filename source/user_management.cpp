@@ -1,13 +1,12 @@
-#include "operations.h"
-#include "struct.h"
-#include "user.h"
+#include "../include/operations.h"
+#include "../include/struct.h"
+#include "../include/user_management.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 
 using namespace std;
-
 
 void teacher_menu(User* teacher){
     int choice;
