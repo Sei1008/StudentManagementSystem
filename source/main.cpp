@@ -3,6 +3,10 @@
 #include "../include/user_management.h"
 #include <iostream>
 
+vector<User> users_list;
+vector<Unit> units_list;
+vector<Enrollment> enrollments_list;
+
 int main(){
     //load data
     cout << "========================================" << endl;

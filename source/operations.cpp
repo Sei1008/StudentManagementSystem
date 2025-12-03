@@ -1,5 +1,4 @@
 #include "../include/operations.h"
-#include "../include/struct.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
