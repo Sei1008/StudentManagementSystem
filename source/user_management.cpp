@@ -8,6 +8,41 @@
 
 using namespace std;
 
+User* find_user_by_username(string username){
+    for(User& user:users_list){
+        if(user.username==username){
+            return &user;
+        }
+    }
+    return nullptr;
+}
+
+User* login_user(){
+    string input_username,input_password;
+
+    cout << "\n========================================" << endl;
+    cout << "            LOGIN SYSTEM                " << endl;
+    cout << "========================================" << endl;
+    cout << "Username: ";
+    cin >> input_username;
+    cout << "Password: ";
+    cin >> input_password;
+
+    User* find_user=find_user_by_username(input_username);
+    if(find_user != nullptr){
+        if(find_user->password==input_password){
+            cout << "\nLogin successfully! Welcome "<< find_user->username<<endl;
+            return find_user;
+        }else{
+            cout << "\nIncorrect password. Please try again!"<<endl;
+            return nullptr;
+        }
+    }
+    cout << "This user do not exist!" <<endl;
+    return nullptr;
+
+}
+
 void teacher_menu(User* teacher){
     int choice;
     do {

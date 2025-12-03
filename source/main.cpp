@@ -1,5 +1,6 @@
 #include "../include/struct.h"
 #include "../include/operations.h"
+#include "../include/user_management.h"
 #include <iostream>
 
 int main(){
@@ -17,8 +18,16 @@ int main(){
     while(current_user==nullptr){
         current_user=login_user();
         if(current_user==nullptr){
-            cout <<"Please try again."<<endl;
+            cout <<"Please try again!"<<endl;
         }
+    }
+    if(current_user->role == "Teacher"){
+        teacher_menu(current_user);
+    }else if(current_user->role == "Student"){
+        student_menu(current_user);
+    }else{
+        cerr <<"Error! Invalid user role: "<<current_user->role<<endl;
+        return 1;
     }
     //save data
     save_all_data();
