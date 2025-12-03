@@ -8,7 +8,7 @@ using namespace std;
 void load_user_from_csv(vector<User>& users_list){
     ifstream file("data/user.csv");
     while(!file.is_open()){
-        cerr<<"Error! Cannot open user.csv file.";
+        cerr<<"Error! Cannot open user.csv file."<<endl;
         return;
     }
     string line;
@@ -109,7 +109,7 @@ void save_unit_to_csv(const vector<Unit>& units_list){
 void load_enrollment_from_csv(vector<Enrollment>& enrollments_list){
     ifstream file("data/enrollment.csv");
     while(!file.is_open()){
-        cerr<<"Error! Cannot open the enrollment.csv file.";
+        cerr<<"Error! Cannot open the enrollment.csv file."<<endl;
         return;
     }
     string line;
