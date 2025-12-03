@@ -148,3 +148,11 @@ void save_enrollment_to_csv(const vector<Enrollment>& enrollments_list){
     file.close();
     cout<<"Saved successfully!"<<endl;
 }
+
+void save_all_data(){
+    cout<<"Saving all data..."<<endl;
+    save_user_to_csv(users_list);
+    save_unit_to_csv(units_list);
+    save_enrollment_to_csv(enrollments_list);
+    cout<<"All data saved successfully!"<<endl;
+}
