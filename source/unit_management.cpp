@@ -17,3 +17,12 @@ void list_all_teaching_units_by_teacher_id(int teacher_id){
     }
 }
 
+int get_the_next_id(){
+    int max=0;
+    for(const Unit& unit:units_list){
+        if(unit.unit_id > max){
+            max=unit.unit_id;
+        }
+    }
+    return max+1;
+}
