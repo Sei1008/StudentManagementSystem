@@ -1,6 +1,7 @@
 #include "../include/operations.h"
 #include "../include/struct.h"
 #include "../include/user_management.h"
+#include "../include/unit_management.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -61,7 +62,7 @@ void teacher_menu(User* teacher){
 
         switch (choice) {
             case 1: {
-                
+                list_all_teaching_units_by_teacher_id(teacher->id);
                 break;
             }
 
