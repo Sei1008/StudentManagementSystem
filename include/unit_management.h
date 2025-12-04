@@ -4,5 +4,5 @@
 #include "../include/struct.h"
 
 void list_all_teaching_units_by_teacher_id(int teacher_id);
-
+int get_the_next_id();
 #endif
