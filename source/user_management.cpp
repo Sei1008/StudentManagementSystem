@@ -22,8 +22,8 @@ User* login_user(){
     string input_username,input_password;
 
     cout << "\n========================================" << endl;
-    cout << "            LOGIN SYSTEM                " << endl;
-    cout << "========================================" << endl;
+    cout << "              LOGIN SYSTEM                " << endl;
+    cout << "==========================================" << endl;
     cout << "Username: ";
     cin >> input_username;
     cout << "Password: ";
@@ -47,9 +47,9 @@ User* login_user(){
 void teacher_menu(User* teacher){
     int choice;
     do {
-        cout << "===============================";
-        cout << "\n        TEACHER MENU       \n";
-        cout << "===============================";
+        cout << "=========================================";
+        cout << "\n             TEACHER MENU            \n";
+        cout << "=========================================";
         cout << "1. List my teaching units\n";
         cout << "2. Add a new unit\n";
         cout << "3. Delete a unit\n";
@@ -62,7 +62,7 @@ void teacher_menu(User* teacher){
 
         switch (choice) {
             case 1: {
-            
+            list_all_teaching_units_by_teacher_id(Unit.teacher_id);
                 break;
             }
 
@@ -99,9 +99,9 @@ void teacher_menu(User* teacher){
 void student_menu(User* student){
     int choice;
     do {
-    cout << "===============================";
-    cout << "\n       STUDENT MENU        \n";
-    cout << "===============================";
+    cout << "=========================================";
+    cout << "\n             STUDENT MENU            \n";
+    cout << "=========================================";
     cout << "1. List available units\n";
     cout << "2. List my enrolled units\n";
     cout << "3. Enroll in a unit\n";
@@ -114,6 +114,7 @@ void student_menu(User* student){
     cin >> choice;
     switch (choice) {
             case 1: {
+            
     
                 break;
             }
@@ -209,4 +210,3 @@ void list_enrolled_units(int student_id){
 }
 
 // 3.Enroll in a unit.
-    
