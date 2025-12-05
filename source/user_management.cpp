@@ -55,14 +55,14 @@ void teacher_menu(User* teacher){
         cout << "3. Delete a unit\n";
         cout << "4. List students in a unit\n";
         cout << "5. Show unit statistics\n";
-        cout << "6. Logout\n";
+        cout << "6. Log out\n";
         cout << "===============================";
         cout << "Enter your choice (1-6) : ";
         cin >> choice;
 
         switch (choice) {
             case 1: {
-                list_all_teaching_units_by_teacher_id(teacher->id);
+            
                 break;
             }
 
@@ -108,13 +108,13 @@ void student_menu(User* student){
     cout << "4. Drop a unit\n";
     cout << "5. Check my scores\n";
     cout << "6. Generate random score (TEST)\n";
-    cout << "7. Logout\n";
+    cout << "7. Log out\n";
     cout << "===============================";
     cout << "Enter choice : ";
     cin >> choice;
     switch (choice) {
             case 1: {
-                
+    
                 break;
             }
 
@@ -150,4 +150,63 @@ void student_menu(User* student){
 
 }
     } while (choice != 7);
+} 
+
+// 1. List available units
+void list_available_units_forstudent(){
+    cout << "==========================================\n";
+    cout << "            All available unit            \n";
+    cout << "==========================================\n";
+    cout << "Unit ID" << setw(5) << "Unit Name" << setw(10) << "Remain capacity" << endl;
+
+    for (const Unit& unit : units_list){
+        if(unit.capacity < Max_capicity){
+            cout << unit.unit_id << setw(5) << unit.unit_name << setw(10) << Max_capicity - unit.capacity << endl; 
+        }
+    }
 }
+
+
+
+//Find unit name by unit id
+Unit* Find_unit_name_by_id(int unit_id){
+    for (const Unit& unit : units_list){
+        if (unit.unit_id == unit_id){
+            return &unit;
+        }
+    }
+    return nullptr;
+}
+
+
+
+
+// 2.List my enrolled units
+void list_enrolled_units(int student_id){
+    cout << "==========================================\n";
+    cout << "             My enrolled units            \n";
+    cout << "==========================================\n";
+
+    cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << setw(10) << "Score" << endl;
+    for (const Enrollment& enrolled : enrollments_list){
+        if(enrolled.student_id == student_id){
+            Unit* unit_ptr = Find_unit_name_by_id(enrolled.unit_id);
+            if (unit_ptr != nullptr){
+                cout << left << setw(10) << unit_ptr->unit_id
+                     << setw(20) << unit_ptr->unit_code
+                     << setw(30) << unit_ptr->unit_name
+                     << setw(10) << enrolled.score << endl;
+            } else {
+                cout << left << setw(10) << enrolled.unit_id
+                     << setw(20) << "Unknown"
+                     << setw(30) << "Unknown unit"
+                     << setw(10) << enrolled.score << endl;
+            }
+
+
+        }
+    }
+}
+
+// 3.Enroll in a unit.
+    
