@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#define Max_capacity 100
+
 struct User{
     int id;
     string username;

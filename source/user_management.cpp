@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -62,7 +63,7 @@ void teacher_menu(User* teacher){
 
         switch (choice) {
             case 1: {
-            list_all_teaching_units_by_teacher_id(Unit.teacher_id);
+            list_all_teaching_units_by_teacher_id(teacher->id);
                 break;
             }
 
@@ -113,65 +114,45 @@ void student_menu(User* student){
     cout << "Enter choice : ";
     cin >> choice;
     switch (choice) {
-            case 1: {
-            
-    
+            case 1:
+                list_available_units_for_student();
                 break;
-            }
-
-            case 2: {
-             
+            case 2: 
+                list_enrolled_units(student->id);
                 break;
-            }
-
-            case 3: {
-    
+            case 3: 
                 break;
-            }
-
-            case 4: {
-                
+            case 4: 
                 break;
-            }
-
-            case 5: {
-                
+            case 5: 
                 break;
-            }
-
-            case 6: {
-
+            case 6: 
                 break;
-            }
             case 7: 
                 cout << "Logging out...\n";
                 break;
             default:
-                cout << "Invalid choice. Please enter a number from 1 to 6.\n";
+                cout << "Invalid choice. Please enter a number from 1 to 7.\n";
 
 }
     } while (choice != 7);
 } 
 
-// 1. List available units
-void list_available_units_forstudent(){
+void list_available_units_for_student(){
     cout << "==========================================\n";
     cout << "            All available unit            \n";
     cout << "==========================================\n";
     cout << "Unit ID" << setw(5) << "Unit Name" << setw(10) << "Remain capacity" << endl;
 
     for (const Unit& unit : units_list){
-        if(unit.capacity < Max_capicity){
-            cout << unit.unit_id << setw(5) << unit.unit_name << setw(10) << Max_capicity - unit.capacity << endl; 
+        if(unit.capacity < Max_capacity){
+            cout << unit.unit_id << setw(5) << unit.unit_name << setw(10) << Max_capacity - unit.capacity << endl; 
         }
     }
 }
 
-
-
-//Find unit name by unit id
-Unit* Find_unit_name_by_id(int unit_id){
-    for (const Unit& unit : units_list){
+Unit* find_unit_name_by_id(int unit_id){
+    for (Unit& unit : units_list){
         if (unit.unit_id == unit_id){
             return &unit;
         }
@@ -179,10 +160,6 @@ Unit* Find_unit_name_by_id(int unit_id){
     return nullptr;
 }
 
-
-
-
-// 2.List my enrolled units
 void list_enrolled_units(int student_id){
     cout << "==========================================\n";
     cout << "             My enrolled units            \n";
@@ -191,7 +168,7 @@ void list_enrolled_units(int student_id){
     cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << setw(10) << "Score" << endl;
     for (const Enrollment& enrolled : enrollments_list){
         if(enrolled.student_id == student_id){
-            Unit* unit_ptr = Find_unit_name_by_id(enrolled.unit_id);
+            Unit* unit_ptr = find_unit_name_by_id(enrolled.unit_id);
             if (unit_ptr != nullptr){
                 cout << left << setw(10) << unit_ptr->unit_id
                      << setw(20) << unit_ptr->unit_code
@@ -203,10 +180,6 @@ void list_enrolled_units(int student_id){
                      << setw(30) << "Unknown unit"
                      << setw(10) << enrolled.score << endl;
             }
-
-
         }
     }
 }
-
-// 3.Enroll in a unit.
