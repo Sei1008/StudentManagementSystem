@@ -62,3 +62,35 @@ void add_new_unit(){
     save_unit_to_csv(units_list);
     
 }
+
+// Check if the unit is full
+bool is_unit_full(const Unit& unit){
+    if (unit.current_enrollment >= unit.capacity){
+        return true;
+    }
+    else return false;
+}
+
+// Count the enrolled students
+int get_student_enrollment_count(int student_id) {
+    int count = 0;
+    for (const Enrollment& enrollment : enrollments_list) {
+        if (enrollment.student_id == student_id) {
+            count++;
+        }
+    }
+    return count;
+}
+
+// check if this student had already enrolled in the unit
+bool is_student_enrolled(int student_id, int unit_id) {
+    for (const Enrollment& enrollment : enrollments_list) {
+        if (enrollment.student_id == student_id && enrollment.unit_id == unit_id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
