@@ -26,3 +26,39 @@ int get_the_next_id(){
     }
     return max+1;
 }
+
+void add_new_unit(){
+    int new_teacher_id,new_capacity;
+    string new_unit_code,new_unit_name;
+    
+    cout << "\n========================================" << endl;
+    cout << "              ADD NEW UNIT               " << endl;
+    cout << "========================================" << endl;
+    cin.ignore(10000,'\n');
+    cout <<"Enter New Unit Code(Ex: IT001): ";
+    getline(cin,new_unit_code);
+    cout <<"Enter Unit Name: ";
+    getline(cin,new_unit_name);
+    cout <<"Enter the Unit's Capacity: ";
+    cin>>new_capacity;
+    cin.ignore(10000,'\n');
+    cout <<"Enter Teacher Id: ";
+    cin>>new_teacher_id;
+    cin.ignore(10000,'\n');
+
+    Unit new_unit;
+    new_unit.unit_id=get_the_next_id();
+    new_unit.unit_code=new_unit_code;
+    new_unit.unit_name=new_unit_name;
+    new_unit.capacity=new_capacity;
+    new_unit.current_enrollment=0;
+    new_unit.teacher_id=new_teacher_id;
+
+    units_list.push_back(new_unit);
+
+    cout << "\nUnit added successfully!" << endl;
+    cout << "Unit ID: " << new_unit.unit_id << " - " << new_unit.unit_name << endl;
+
+    save_unit_to_csv(units_list);
+    
+}

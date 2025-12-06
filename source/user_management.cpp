@@ -68,7 +68,7 @@ void teacher_menu(User* teacher){
             }
 
             case 2: {
-             
+            add_new_unit();
                 break;
             }
 
