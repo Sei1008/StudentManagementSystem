@@ -6,7 +6,8 @@
 
 using namespace std;
 
-#define Max_capacity 100
+#define MAX_CAPACITY 100
+#define MAX_STUDENT_UNITS 3
 
 struct User{
     int id;
