@@ -63,12 +63,12 @@ void teacher_menu(User* teacher){
 
         switch (choice) {
             case 1: {
-            list_all_teaching_units_by_teacher_id(teacher->id);
+                list_all_teaching_units_by_teacher_id(teacher->id); 
                 break;
             }
 
             case 2: {
-            add_new_unit();
+                add_new_unit();
                 break;
             }
 
@@ -148,7 +148,7 @@ void student_menu(User* student){
                 cout << "Logging out...\n";
                 break;
             default:
-                cout << "Invalid choice. Please enter a number from 1 to 6.\n";
+                cout << "Invalid choice. Please enter a number from 1 to 7.\n";
 
 }
     } while (choice != 7);
@@ -174,7 +174,7 @@ void list_available_units_for_student(){
 
 
 //Find unit name by unit id
-Unit* Find_unit_name_by_unit_id(int unit_id){
+Unit* find_unit_name_by_id(int unit_id){
     for (Unit& unit : units_list){
         if (unit.unit_id == unit_id){
             return &unit;
@@ -185,14 +185,14 @@ Unit* Find_unit_name_by_unit_id(int unit_id){
 //Find unit name by unit code
 Unit* find_unit_by_code(string code) {
     for (Unit& unit : units_list) {
-        if (unit.unit_code == code) { // So sánh chuỗi
+        if (unit.unit_code == code) { 
             return &unit;
         }
     }
     return nullptr;
 }
 
-
+k
 
 // 2.List my enrolled units
 void list_enrolled_units(int student_id){
@@ -227,12 +227,15 @@ void enroll_unit(User* student){
     string unit_code;
     cout << "\n========================================" << endl;
     cout << "           ENROLL IN A UNIT             " << endl;
-    cout << "========================================" << endl;
+    cout << "========================================" << endl; 
+
     list_available_units_for_student();
+    cin.ignore (10000,'\n');
+
     cout << "\nEnter unit code to enroll : ";
-    cin >> unit_code;
+    getline (cin,unit_code);
    // check student's enrollment limit
-    if (get_student_enrollment_count(student->id) >= MAX_STUDENT_UNITS){
+    if (get_student_enrollment_count(student->id) == MAX_STUDENT_UNITS){
         cout << "You have reached the maximum enrollment limit (" << MAX_STUDENT_UNITS << " units)." << endl;
         return;
     }
@@ -259,10 +262,10 @@ void enroll_unit(User* student){
     Enrollment new_enrollment;
     new_enrollment.student_id = student->id;
     new_enrollment.unit_id = target_unit->unit_id;
-    new_enrollment.score = -1; //(there no score)
-    enrollments_list.push_back(new_enrollment);
+    new_enrollment.score = NULL; //(there no score)
 
     //update the enrollment
+    enrollments_list.push_back(new_enrollment);
     target_unit->current_enrollment++;
     // Notify and save data
     cout << "\nSuccess! You have enrolled in the unit: " << target_unit->unit_name << endl;

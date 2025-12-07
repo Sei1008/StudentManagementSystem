@@ -65,10 +65,8 @@ void add_new_unit(){
 
 // Check if the unit is full
 bool is_unit_full(const Unit& unit){
-    if (unit.current_enrollment >= unit.capacity){
-        return true;
-    }
-    else return false;
+    if (unit.current_enrollment >= unit.capacity) return true;
+    return false;
 }
 
 // Count the enrolled students
