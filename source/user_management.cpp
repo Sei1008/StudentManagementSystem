@@ -154,7 +154,6 @@ void student_menu(User* student){
     } while (choice != 7);
 } 
 
-// 1. List available units
 void list_available_units_for_student(){
     cout << "==========================================\n";
     cout << "            All available unit            \n";
@@ -171,9 +170,6 @@ void list_available_units_for_student(){
     }
 }
 
-
-
-//Find unit name by unit id
 Unit* find_unit_name_by_id(int unit_id){
     for (Unit& unit : units_list){
         if (unit.unit_id == unit_id){
@@ -182,7 +178,7 @@ Unit* find_unit_name_by_id(int unit_id){
     }
     return nullptr;
 }
-//Find unit name by unit code
+
 Unit* find_unit_by_code(string code) {
     for (Unit& unit : units_list) {
         if (unit.unit_code == code) { 
@@ -192,8 +188,6 @@ Unit* find_unit_by_code(string code) {
     return nullptr;
 }
 
-
-// 2.List my enrolled units
 void list_enrolled_units(int student_id){
     cout << "==========================================\n";
     cout << "             My enrolled units            \n";
@@ -202,7 +196,7 @@ void list_enrolled_units(int student_id){
     cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << setw(10) << "Score" << endl;
     for (const Enrollment& enrolled : enrollments_list){
         if(enrolled.student_id == student_id){
-            Unit* unit_ptr = find_unit_name_by_unit_id(enrolled.unit_id);
+            Unit* unit_ptr = find_unit_name_by_id(enrolled.unit_id);
             if (unit_ptr != nullptr){
                 cout << left << setw(10) << unit_ptr->unit_id
                      << setw(20) << unit_ptr->unit_code
@@ -220,8 +214,6 @@ void list_enrolled_units(int student_id){
     }
 }
 
-
-// 3.Enroll in a unit.
 void enroll_unit(User* student){
     string unit_code;
     cout << "\n========================================" << endl;
@@ -233,26 +225,23 @@ void enroll_unit(User* student){
 
     cout << "\nEnter unit code to enroll : ";
     getline (cin,unit_code);
-   // check student's enrollment limit
+
     if (get_student_enrollment_count(student->id) == MAX_STUDENT_UNITS){
         cout << "You have reached the maximum enrollment limit (" << MAX_STUDENT_UNITS << " units)." << endl;
         return;
     }
 
-    // find and check the existent of unit
     Unit* target_unit = find_unit_by_code(unit_code);
     if (target_unit == nullptr){
         cout << "Error! Unit code '" << unit_code << "' not found." << endl;
         return;
     }
 
-    //check for the duplication
-    if (is_student_enrolled(student->id, target_unit->unit_id)){
+    if (is_student_enrolled_in(student->id, target_unit->unit_id)){
         cout << "Error! You are already enrolled in this unit." << endl;
         return;
     }
 
-    //check for the capacity
     if (is_unit_full(*target_unit)){
         cout << "Error! Unit '" << unit_code << "' is full (Capacity: " << target_unit->capacity << ")." << endl;
         return;
@@ -263,10 +252,9 @@ void enroll_unit(User* student){
     new_enrollment.unit_id = target_unit->unit_id;
     new_enrollment.score = NULL; //(there no score)
 
-    //update the enrollment
     enrollments_list.push_back(new_enrollment);
     target_unit->current_enrollment++;
-    // Notify and save data
+
     cout << "\nSuccess! You have enrolled in the unit: " << target_unit->unit_name << endl;
     save_all_data();
 }
