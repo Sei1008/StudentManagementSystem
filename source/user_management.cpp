@@ -192,7 +192,6 @@ Unit* find_unit_by_code(string code) {
     return nullptr;
 }
 
-k
 
 // 2.List my enrolled units
 void list_enrolled_units(int student_id){
@@ -203,7 +202,7 @@ void list_enrolled_units(int student_id){
     cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << setw(10) << "Score" << endl;
     for (const Enrollment& enrolled : enrollments_list){
         if(enrolled.student_id == student_id){
-            Unit* unit_ptr = Find_unit_name_by_unit_id(enrolled.unit_id);
+            Unit* unit_ptr = find_unit_name_by_unit_id(enrolled.unit_id);
             if (unit_ptr != nullptr){
                 cout << left << setw(10) << unit_ptr->unit_id
                      << setw(20) << unit_ptr->unit_code
