@@ -119,9 +119,11 @@ void delete_unit(){
     }
 
     vector<Unit>::iterator it_to_delete=find_it_by_unit_id(unit_id_to_delete);
-    units_list.erase(it_to_delete);
-    cout<<"Delete successfully!"<<endl;
-    save_unit_to_csv(units_list);
+    if(it_to_delete != units_list.end()){
+        units_list.erase(it_to_delete);
+        cout<<"Delete successfully!"<<endl;
+        save_unit_to_csv(units_list);
+    }
 }
 
 void list_students_in_unit(){
