@@ -2,6 +2,7 @@
 #include "../include/struct.h"
 #include "../include/user_management.h"
 #include "../include/unit_management.h"
+#include "../include/enrollment_management.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -73,12 +74,12 @@ void teacher_menu(User* teacher){
             }
 
             case 3: {
-    
+                delete_unit();
                 break;
             }
 
             case 4: {
-                
+                list_students_in_unit();
                 break;
             }
 
