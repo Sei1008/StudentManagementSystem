@@ -2,6 +2,7 @@
 #include "../include/struct.h"
 #include "../include/user_management.h"
 #include "../include/unit_management.h"
+#include "../include/enrollment_management.h"
 #include <iostream>
 #include <iomanip>
 
@@ -63,13 +64,11 @@ void add_new_unit(){
     
 }
 
-// Check if the unit is full
 bool is_unit_full(const Unit& unit){
     if (unit.current_enrollment >= unit.capacity) return true;
     return false;
 }
 
-// Count the enrolled students
 int get_student_enrollment_count(int student_id) {
     int count = 0;
     for (const Enrollment& enrollment : enrollments_list) {
@@ -80,7 +79,6 @@ int get_student_enrollment_count(int student_id) {
     return count;
 }
 
-// check if this student had already enrolled in the unit
 bool is_student_enrolled_in(int student_id, int unit_id) {
     for (const Enrollment& enrollment : enrollments_list) {
         if (enrollment.student_id == student_id && enrollment.unit_id == unit_id) {
@@ -90,5 +88,60 @@ bool is_student_enrolled_in(int student_id, int unit_id) {
     return false;
 }
 
+vector<Unit>::iterator find_it_by_unit_id(int unit_id){
+    for (auto it = units_list.begin(); it != units_list.end(); it++) {
+        if (it->unit_id == unit_id) {
+            return it;
+        }
+    }
+    return units_list.end();
+}
 
+void delete_unit(){
+    int unit_id_to_delete;
+    cin.ignore(10000,'\n');
+    cout << "\n========================================" << endl;
+    cout << "            DELETE UNIT                 " << endl;
+    cout << "========================================" << endl;
+    cout << "Enter Unit ID to delete: ";
+    cin>>unit_id_to_delete;
 
+    Unit* unit_to_delete=find_unit_name_by_id(unit_id_to_delete);
+
+    if(unit_to_delete==nullptr){
+        cout<<"Error! The unit id does not exist."<<endl;
+        return;
+    }
+
+    if(unit_to_delete->current_enrollment>0){
+        cout<<"This unit still has students studying!"<<endl;
+        return;
+    }
+
+    vector<Unit>::iterator it_to_delete=find_it_by_unit_id(unit_id_to_delete);
+    units_list.erase(it_to_delete);
+    cout<<"Delete successfully!"<<endl;
+    save_unit_to_csv(units_list);
+}
+
+void list_students_in_unit(){
+    int unit_id_to_list;
+    cin.ignore(10000,'\n');
+    cout << "=========================================";
+    cout << "\n         LIST STUDENT IN UNIT        \n";
+    cout << "=========================================";
+    cout << "Enter Unit ID to list: ";
+    cin >> unit_id_to_list;
+
+    Unit* find_unit=find_unit_name_by_id(unit_id_to_list);
+    if(find_unit==nullptr){
+        cout << "Error! Can't find the Unit."<<endl;
+        return;
+    }
+
+    vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_list);
+    cout << "Student ID" << setw(5) << "Score" <<endl;
+    for(const Enrollment& list:students_list){
+        cout << list.student_id << setw(5) << list.score<<endl;
+    }
+}

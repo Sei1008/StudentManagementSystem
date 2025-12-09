@@ -9,7 +9,7 @@ void student_menu(User* student);
 User* login_user();
 User* find_user_by_username(string username);
 
-Unit* Find_unit_name_by_unit_id(int unit_id);
+Unit* find_unit_name_by_id(int unit_id);
 Unit* find_unit_by_code(string code);
 
 void enroll_unit(User* student);

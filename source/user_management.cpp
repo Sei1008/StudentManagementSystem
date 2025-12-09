@@ -2,6 +2,7 @@
 #include "../include/struct.h"
 #include "../include/user_management.h"
 #include "../include/unit_management.h"
+#include "../include/enrollment_management.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -73,12 +74,12 @@ void teacher_menu(User* teacher){
             }
 
             case 3: {
-    
+                delete_unit();
                 break;
             }
 
             case 4: {
-                
+                list_students_in_unit();
                 break;
             }
 
@@ -288,7 +289,7 @@ void check_my_scores (int student_id){
             if (enrollment.score == -1) {
                 cout << "N/A" << endl; // no scores
             } else {
-                cout << enrollment.score << endl; // scores available
+                cout << setw(10) << enrollment.score << endl; // scores available
             }
         }
     }
