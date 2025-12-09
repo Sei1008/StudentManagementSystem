@@ -17,8 +17,8 @@ void list_available_units_for_student();
 void list_enrolled_units(int student_id);
 
 bool is_unit_full(const Unit& unit);
-bool is_student_enrolled(int student_id, int unit_id);
-
+bool is_student_enrolled_in(int student_id, int unit_id);
+void check_my_scores(int student_id);
 
 int get_student_enrollment_count(int student_id);
 #endif

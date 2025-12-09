@@ -137,7 +137,7 @@ void student_menu(User* student){
             }
 
             case 5: {
-                
+                check_my_scores(student->id);
                 break;
             }
 
@@ -251,7 +251,7 @@ void enroll_unit(User* student){
     Enrollment new_enrollment;
     new_enrollment.student_id = student->id;
     new_enrollment.unit_id = target_unit->unit_id;
-    new_enrollment.score = NULL; //(there no score)
+    new_enrollment.score = -1; //(there no score)
 
     enrollments_list.push_back(new_enrollment);
     target_unit->current_enrollment++;
@@ -259,3 +259,44 @@ void enroll_unit(User* student){
     cout << "\nSuccess! You have enrolled in the unit: " << target_unit->unit_name << endl;
     save_all_data();
 }
+
+void check_my_scores (int student_id){
+    cout << "\n========================================" << endl;
+    cout << "                 MY SCORES                 " << endl;
+    cout << "==========================================" << endl;
+    cout << left << setw(10) << "Unit ID" 
+         << left << setw(15) << "Unit Code" 
+         << left << setw(30) << "Unit Name" 
+         << left << setw(10) << "Score" << endl;
+    cout << "----------------------------------------------------------------" << endl;
+    bool found_any = false;
+
+    for (const Enrollment& enrollment : enrollments_list){
+        if (enrollment.student_id == student_id){
+            found_any == true;
+            Unit* unit = find_unit_name_by_id(enrollment.unit_id);
+            if (unit != nullptr){
+                cout << left << setw(10) << unit->unit_id
+                     << left << setw(15) << unit->unit_code
+                     << left << setw(30) << unit->unit_name;
+            }
+            else {
+                cout << left << setw(10) << enrollment.unit_id 
+                << left << setw(15) << "UNKNOWN" 
+                     << left << setw(30) << "Unknown Unit" << endl;
+            }
+            if (enrollment.score == -1) {
+                cout << "N/A" << endl; // no scores
+            } else {
+                cout << setw(10) << enrollment.score << endl; // scores available
+            }
+        }
+    }
+
+    if (!found_any) {
+        cout << "\nYou have not enrolled in any units yet." << endl;
+    }
+    cout << "\nPress Enter to return to menu...";
+    cin.ignore();
+    cin.get();
+    }
