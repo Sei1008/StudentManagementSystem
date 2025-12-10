@@ -12,5 +12,5 @@ bool is_student_enrolled_in(int student_id, int unit_id);
 vector<Unit>::iterator find_it_by_unit_id(int unit_id);
 void delete_unit();
 void list_students_in_unit();
-
+void show_unit_statistic();
 #endif

@@ -84,7 +84,7 @@ void teacher_menu(User* teacher){
             }
 
             case 5: {
-                
+                show_unit_statistic();
                 break;
             }
 
