@@ -147,3 +147,50 @@ void list_students_in_unit(){
         cout << list.student_id << setw(5) << list.score<<endl;
     }
 }
+
+void show_unit_statistic(){
+    int unit_id_to_show;
+    cout << "=========================================";
+    cout << "\n             STATISTICS              \n";
+    cout << "=========================================";
+    cout <<"Enter Unit ID to show: ";
+    cin >> unit_id_to_show;
+
+    Unit* find_unit=find_unit_name_by_id(unit_id_to_show);
+    if(find_unit == nullptr){
+        cout <<"Error! Cannot find the Unit."<<endl;
+        return;
+    }
+
+    vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_show);
+    int count=students_list.size();
+    int sum=0;
+    int max=INT_MIN;
+    int min=INT_MAX;
+    int count_pass=0;
+    int count_npass=0;
+    cout << "========================================="<<endl;
+    cout << "Student ID" << setw(10) << "Scores" << setw(5) << "Status" << endl;
+    for(const Enrollment& cal: students_list){
+        cout << cal.student_id << setw(10) << cal.score <<setw(5);
+        if(cal.score >=50){
+            cout<<"PASSED"<<endl;
+            count_pass++;
+        }else{
+            cout<<"NOT PASSED"<<endl;
+            count_npass++;
+        }
+        if(cal.score>max) max=cal.score;
+        if(cal.score<min) min=cal.score;
+        sum += cal.score;
+    }
+    cout << "========================================="<<endl;
+    cout << "         SUMMARY STATISTICS REPORT       " <<endl;
+    cout << "-----------------------------------------"<<endl;
+    cout << "Number Of Students: "<< count <<endl;
+    cout << "Highest Score: "<< max <<endl;
+    cout << "Lowest Score: "<< min <<endl;
+    cout << "Average Score: "<< fixed << setprecision(2) << (double)sum/count <<endl;
+    cout << "Pass Rate: "<< fixed << setprecision(2) << (double)count_pass/count*100 << "%" <<endl;
+    cout << "Failure Rate: "<< fixed << setprecision(2) << (double)count_npass/count*100 << "%" <<endl;
+}
