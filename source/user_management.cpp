@@ -273,7 +273,7 @@ void check_my_scores (int student_id){
 
     for (const Enrollment& enrollment : enrollments_list){
         if (enrollment.student_id == student_id){
-            found_any == true;
+            found_any = true;
             Unit* unit = find_unit_name_by_id(enrollment.unit_id);
             if (unit != nullptr){
                 cout << left << setw(10) << unit->unit_id
@@ -282,13 +282,14 @@ void check_my_scores (int student_id){
             }
             else {
                 cout << left << setw(10) << enrollment.unit_id 
-                << left << setw(15) << "UNKNOWN" 
-                     << left << setw(30) << "Unknown Unit" << endl;
+                     << left << setw(15) << "UNKNOWN" 
+                     << left << setw(30) << "Unknown Unit" 
             }
+            // cout scores
             if (enrollment.score == -1) {
-                cout << "N/A" << endl; // no scores
+                cout << left << setw(10) << "N/A" << endl; // no scores
             } else {
-                cout << setw(10) << enrollment.score << endl; // scores available
+                cout << left << setw(10) << enrollment.score << endl; // scores available
             }
         }
     }

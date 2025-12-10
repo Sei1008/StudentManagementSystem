@@ -1,5 +1,6 @@
 #ifndef user_management_h
 #define user_management_h
+#include "../include/struct.h"
 
 using namespace std;
 
