@@ -324,7 +324,7 @@ void drop_unit(User* student){
             return;
         }
         //iterator
-        for (auto it = enrollments_list.begin(); it != enrollments_list.end();){
+        for (auto it = enrollments_list.begin(); it != enrollments_list.end();it++){
                 //check condition
             if (it->student_id == student->id && it->unit_id == target_unit->unit_id){
                 //delete the unit at it
@@ -335,10 +335,6 @@ void drop_unit(User* student){
 
                 save_all_data(); 
                 return;
-            }
-            else {
-                // if not , move to the next position
-                ++it;
             }
         }
     }
