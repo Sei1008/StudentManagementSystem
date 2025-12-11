@@ -1,5 +1,6 @@
 #ifndef user_management_h
 #define user_management_h
+#include "../include/struct.h"
 
 using namespace std;
 
@@ -21,4 +22,5 @@ bool is_student_enrolled_in(int student_id, int unit_id);
 void check_my_scores(int student_id);
 
 int get_student_enrollment_count(int student_id);
+void drop_unit(User* student); // case4 student
 #endif

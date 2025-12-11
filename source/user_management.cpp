@@ -132,7 +132,7 @@ void student_menu(User* student){
             }
 
             case 4: {
-                
+            drop_unit(student);    
                 break;
             }
 
@@ -154,7 +154,7 @@ void student_menu(User* student){
 }
     } while (choice != 7);
 } 
-
+// Case1
 void list_available_units_for_student(){
     cout << "==========================================\n";
     cout << "            All available unit            \n";
@@ -170,7 +170,7 @@ void list_available_units_for_student(){
         }
     }
 }
-
+//supporting function
 Unit* find_unit_name_by_id(int unit_id){
     for (Unit& unit : units_list){
         if (unit.unit_id == unit_id){
@@ -188,7 +188,7 @@ Unit* find_unit_by_code(string code) {
     }
     return nullptr;
 }
-
+//Case2
 void list_enrolled_units(int student_id){
     cout << "==========================================\n";
     cout << "             My enrolled units            \n";
@@ -214,7 +214,7 @@ void list_enrolled_units(int student_id){
         }
     }
 }
-
+//Case3
 void enroll_unit(User* student){
     string unit_code;
     cout << "\n========================================" << endl;
@@ -259,7 +259,7 @@ void enroll_unit(User* student){
     cout << "\nSuccess! You have enrolled in the unit: " << target_unit->unit_name << endl;
     save_all_data();
 }
-
+//Case5
 void check_my_scores (int student_id){
     cout << "\n========================================" << endl;
     cout << "                 MY SCORES                 " << endl;
@@ -273,7 +273,7 @@ void check_my_scores (int student_id){
 
     for (const Enrollment& enrollment : enrollments_list){
         if (enrollment.student_id == student_id){
-            found_any == true;
+            found_any = true;
             Unit* unit = find_unit_name_by_id(enrollment.unit_id);
             if (unit != nullptr){
                 cout << left << setw(10) << unit->unit_id
@@ -282,13 +282,14 @@ void check_my_scores (int student_id){
             }
             else {
                 cout << left << setw(10) << enrollment.unit_id 
-                << left << setw(15) << "UNKNOWN" 
-                     << left << setw(30) << "Unknown Unit" << endl;
+                     << left << setw(15) << "UNKNOWN" 
+                     << left << setw(30) << "Unknown Unit" 
             }
+            // cout scores
             if (enrollment.score == -1) {
-                cout << "N/A" << endl; // no scores
+                cout << left << setw(10) << "N/A" << endl; // no scores
             } else {
-                cout << setw(10) << enrollment.score << endl; // scores available
+                cout << left << setw(10) << enrollment.score << endl; // scores available
             }
         }
     }
@@ -299,4 +300,41 @@ void check_my_scores (int student_id){
     cout << "\nPress Enter to return to menu...";
     cin.ignore();
     cin.get();
+    }
+
+//Case4
+void drop_unit(User* student){
+        string unit_code;
+        cout << "\n========================================" << endl;
+        cout << "           DROP A UNIT                  " << endl;
+        cout << "========================================" << endl;
+        list_enrolled_units(student->id);
+        cin.ignore (10000,'\n'); 
+        cout << "\nEnter Unit Code to drop: ";
+        getline (cin, unit_code); 
+        // find the unit
+        Unit* target_unit = find_unit_by_code(unit_code);
+        if (target_unit == nullptr){
+            cout << "Error! Unit code '" << unit_code << "' not found." << endl;
+            return;
+        }
+        //check whether this student was not enroll in this unit
+        if (!is_student_enrolled_in(student->id,target_unit->unit_id)){
+            cout << "Error! You are not enrolled in this unit." << endl;
+            return;
+        }
+        //iterator
+        for (auto it = enrollments_list.begin(); it != enrollments_list.end();it++){
+                //check condition
+            if (it->student_id == student->id && it->unit_id == target_unit->unit_id){
+                //delete the unit at it
+                it = enrollments_list.erase(it);
+                cout << "\nSuccess! Dropped Unit: " << target_unit->unit_name << endl;
+                //update the current enrollment
+                target_unit->current_enrollment--;
+
+                save_all_data(); 
+                return;
+            }
+        }
     }
