@@ -82,9 +82,9 @@ void load_unit_from_csv(vector <Unit>& units_list){
         }catch(const exception& e){
             cerr<<"Error parsing line: "<< line<<endl;
         }
-        file.close();
-        cout<<"Units loaded successfully!"<<endl;
     }
+    file.close();
+    cout<<"Units loaded successfully!"<<endl;
 }
 
 void save_unit_to_csv(const vector<Unit>& units_list){

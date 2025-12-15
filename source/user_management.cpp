@@ -157,19 +157,22 @@ void student_menu(User* student){
 } 
 
 void list_available_units_for_student(){
-    cout << "==========================================\n";
-    cout << "            All available unit            \n";
-    cout << "==========================================\n";
-    cout <<left<<setw(5)<< "Unit ID" << setw(5) << "Unit Name" << setw(10) << "Remain capacity" << endl;
-
+    cout << "==============================================================\n";
+    cout << "                        All available unit                    \n";
+    cout << "==============================================================\n";
+    cout << left << setw(10) << "Unit ID" 
+         << setw(30) << "Unit Name"         
+         << setw(20) << "Remain capacity" << endl;
+    cout << "--------------------------------------------------------------\n";
     for (const Unit& unit : units_list){
         int remain_capacity = unit.capacity - unit.current_enrollment;
         if(remain_capacity > 0){
-            cout <<left<< unit.unit_id << setw(5) 
-            << unit.unit_name << setw(10) 
-            << remain_capacity << endl; 
+            cout << left << setw(10) << unit.unit_id 
+                 << setw(30) << unit.unit_name 
+                 << setw(20) << remain_capacity << endl;
         }
     }
+    cout<<endl;
 }
 
 Unit* find_unit_name_by_id(int unit_id){
