@@ -160,12 +160,12 @@ void list_available_units_for_student(){
     cout << "==========================================\n";
     cout << "            All available unit            \n";
     cout << "==========================================\n";
-    cout <<left<< "Unit ID" << setw(5) << "Unit Name" << setw(10) << "Remain capacity" << endl;
+    cout <<left<<setw(5)<< "Unit ID" << setw(5) << "Unit Name" << setw(10) << "Remain capacity" << endl;
 
     for (const Unit& unit : units_list){
         int remain_capacity = unit.capacity - unit.current_enrollment;
         if(remain_capacity > 0){
-            cout << unit.unit_id << setw(5) 
+            cout <<left<< unit.unit_id << setw(5) 
             << unit.unit_name << setw(10) 
             << remain_capacity << endl; 
         }
