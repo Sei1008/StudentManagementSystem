@@ -30,10 +30,11 @@ User* login_user(){
     cin >> input_username;
     cout << "Password: ";
     cin >> input_password;
-
+    
+    unsigned long hashPass=encrypt_djb2(input_password);
     User* find_user=find_user_by_username(input_username);
     if(find_user != nullptr){
-        if(find_user->password==input_password){
+        if(find_user->password==to_string(hashPass)){
             cout << "\nLogin successfully! Welcome "<< find_user->username<<endl;
             return find_user;
         }else{
@@ -84,7 +85,7 @@ void teacher_menu(User* teacher){
             }
 
             case 5: {
-                
+                show_unit_statistic();
                 break;
             }
 
@@ -132,7 +133,7 @@ void student_menu(User* student){
             }
 
             case 4: {
-                
+            drop_unit(student);    
                 break;
             }
 
@@ -283,13 +284,12 @@ void check_my_scores (int student_id){
             else {
                 cout << left << setw(10) << enrollment.unit_id 
                      << left << setw(15) << "UNKNOWN" 
-                     << left << setw(30) << "Unknown Unit" 
+                     << left << setw(30) << "Unknown Unit";
             }
-            // cout scores
             if (enrollment.score == -1) {
-                cout << left << setw(10) << "N/A" << endl; // no scores
+                cout << left << setw(10) << "N/A" << endl; 
             } else {
-                cout << left << setw(10) << enrollment.score << endl; // scores available
+                cout << left << setw(10) << enrollment.score << endl;
             }
         }
     }
@@ -301,3 +301,72 @@ void check_my_scores (int student_id){
     cin.ignore();
     cin.get();
     }
+
+void drop_unit(User* student){
+        string unit_code;
+        cout << "\n========================================" << endl;
+        cout << "           DROP A UNIT                  " << endl;
+        cout << "========================================" << endl;
+        list_enrolled_units(student->id);
+        cin.ignore (10000,'\n'); 
+        cout << "\nEnter Unit Code to drop: ";
+        getline (cin, unit_code); 
+        
+        Unit* target_unit = find_unit_by_code(unit_code);
+        if (target_unit == nullptr){
+            cout << "Error! Unit code '" << unit_code << "' not found." << endl;
+            return;
+        }
+
+        if (!is_student_enrolled_in(student->id,target_unit->unit_id)){
+            cout << "Error! You are not enrolled in this unit." << endl;
+            return;
+        }
+        for (auto it = enrollments_list.begin(); it != enrollments_list.end();it++){
+            if (it->student_id == student->id && it->unit_id == target_unit->unit_id){
+                //delete the unit at it
+                enrollments_list.erase(it);
+                cout << "\nSuccess! Dropped Unit: " << target_unit->unit_name << endl;
+                target_unit->current_enrollment--;
+                save_all_data(); 
+                return;
+            }
+        }
+    }
+
+unsigned long  encrypt_djb2(string password){
+    unsigned long hash = 5381;
+    for(char c: password){
+        hash=((hash<<5)+hash) +c;
+    }
+    return hash;
+}
+//case6
+void generate_random_scores(int student_id) {
+    cout << "\n========================================" << endl;
+    cout << "      GENERATE RANDOM SCORES (TEST)     " << endl;
+    cout << "========================================" << endl;
+
+    bool updated = false;
+    for (Enrollment& enrollment : enrollments_list) {
+        if (enrollment.student_id == student_id && enrollment.score == -1) {
+            
+            int random_score = rand() % (100 - 40 + 1) + 40; 
+            
+            enrollment.score = random_score;
+            updated = true;
+            
+            Unit* unit = find_unit_name_by_id(enrollment.unit_id);
+            string unit_name = (unit != nullptr) ? unit->unit_name : "Unknown Unit";
+
+            cout << "Generated score for " << unit_name << ": " << random_score << endl;
+        }
+    }
+
+    if (updated) {
+        cout << "\nAll pending units have been graded!" << endl;
+        save_all_data(); 
+    } else {
+        cout << "\nYou have no units waiting for grades (or you haven't enrolled in any)." << endl;
+    }
+}
