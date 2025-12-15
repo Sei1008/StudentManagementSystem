@@ -340,3 +340,32 @@ unsigned long  encrypt_djb2(string password){
     }
     return hash;
 }
+
+void generate_random_scores(int student_id) {
+    cout << "\n========================================" << endl;
+    cout << "      GENERATE RANDOM SCORES (TEST)     " << endl;
+    cout << "========================================" << endl;
+
+    bool updated = false;
+    for (Enrollment& enrollment : enrollments_list) {
+        if (enrollment.student_id == student_id && enrollment.score == -1) {
+
+            int random_score = rand() % (100 - 40 + 1) + 40; 
+
+            enrollment.score = random_score;
+            updated = true;
+
+            Unit* unit = find_unit_name_by_id(enrollment.unit_id);
+            string unit_name = (unit != nullptr) ? unit->unit_name : "Unknown Unit";
+
+            cout << "Generated score for " << unit_name << ": " << random_score << endl;
+        }
+    }
+
+    if (updated) {
+        cout << "\nAll pending units have been graded!" << endl;
+        save_all_data(); 
+    } else {
+        cout << "\nYou have no units waiting for grades (or you haven't enrolled in any)." << endl;
+    }
+}

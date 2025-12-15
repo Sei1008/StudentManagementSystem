@@ -24,4 +24,6 @@ int get_student_enrollment_count(int student_id);
 void drop_unit(User* student);
 
 unsigned long encrypt_djb2(string password);
+
+void generate_random_scores(int student_id);
 #endif
