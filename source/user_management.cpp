@@ -52,14 +52,14 @@ void teacher_menu(User* teacher){
     do {
         cout << "=========================================";
         cout << "\n             TEACHER MENU            \n";
-        cout << "=========================================";
+        cout << "========================================="<<endl;
         cout << "1. List my teaching units\n";
         cout << "2. Add a new unit\n";
         cout << "3. Delete a unit\n";
         cout << "4. List students in a unit\n";
         cout << "5. Show unit statistics\n";
         cout << "6. Log out\n";
-        cout << "===============================";
+        cout << "==============================="<<endl;
         cout << "Enter your choice (1-6) : ";
         cin >> choice;
 
@@ -104,7 +104,7 @@ void student_menu(User* student){
     do {
     cout << "=========================================";
     cout << "\n             STUDENT MENU            \n";
-    cout << "=========================================";
+    cout << "========================================="<<endl;
     cout << "1. List available units\n";
     cout << "2. List my enrolled units\n";
     cout << "3. Enroll in a unit\n";
@@ -112,7 +112,7 @@ void student_menu(User* student){
     cout << "5. Check my scores\n";
     cout << "6. Generate random score (TEST)\n";
     cout << "7. Log out\n";
-    cout << "===============================";
+    cout << "==============================="<<endl;
     cout << "Enter choice : ";
     cin >> choice;
     switch (choice) {

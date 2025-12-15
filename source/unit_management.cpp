@@ -126,12 +126,23 @@ void delete_unit(){
     }
 }
 
+void list_all_units(){
+    cout << "=========================================";
+    cout << "\n             LIST OF UNITS            \n";
+    cout << "========================================="<<endl;
+    cout << left<<"ID"<< setw(5) << "Unit Name"<<endl;
+    for(const Unit& unit:units_list){
+        cout <<left << unit.unit_id << setw(5)<<unit.unit_name<<endl;
+    }
+}
+
 void list_students_in_unit(){
     int unit_id_to_list;
     cin.ignore(10000,'\n');
     cout << "=========================================";
     cout << "\n         LIST STUDENT IN UNIT        \n";
-    cout << "=========================================";
+    cout << "========================================="<<endl;
+    list_all_units;
     cout << "Enter Unit ID to list: ";
     cin >> unit_id_to_list;
 

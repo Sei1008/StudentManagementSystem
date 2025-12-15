@@ -6,7 +6,7 @@
 using namespace std;
 
 void load_user_from_csv(vector<User>& users_list){
-    ifstream file("data/user.csv");
+    ifstream file("../data/user.csv");
     while(!file.is_open()){
         cerr<<"Error! Cannot open user.csv file."<<endl;
         return;
@@ -34,7 +34,7 @@ void load_user_from_csv(vector<User>& users_list){
 }
 
 void save_user_to_csv(const vector<User>& users_list){
-    ofstream file("data/user.csv");
+    ofstream file("../data/user.csv");
     while(!file.is_open()){
         cerr<<"Error! Cannot open user.csv for writing";
         return;
@@ -54,7 +54,7 @@ void save_user_to_csv(const vector<User>& users_list){
 }
 
 void load_unit_from_csv(vector <Unit>& units_list){
-    ifstream file("data/unit.csv");
+    ifstream file("../data/unit.csv");
     while(!file.is_open()){
         cerr<<"Error! Cannnot open the units.csv file."<<endl;
         return;
@@ -88,7 +88,7 @@ void load_unit_from_csv(vector <Unit>& units_list){
 }
 
 void save_unit_to_csv(const vector<Unit>& units_list){
-    ofstream file("data/unit.csv");
+    ofstream file("../data/unit.csv");
     while(!file.is_open()){
         cerr<<"Error! Cannot open the unit.csv file."<<endl;
         return;
@@ -107,7 +107,7 @@ void save_unit_to_csv(const vector<Unit>& units_list){
 }
 
 void load_enrollment_from_csv(vector<Enrollment>& enrollments_list){
-    ifstream file("data/enrollment.csv");
+    ifstream file("../data/enrollment.csv");
     while(!file.is_open()){
         cerr<<"Error! Cannot open the enrollment.csv file."<<endl;
         return;
@@ -132,7 +132,7 @@ void load_enrollment_from_csv(vector<Enrollment>& enrollments_list){
 }
 
 void save_enrollment_to_csv(const vector<Enrollment>& enrollments_list){
-    ofstream file("data/enrollment.csv");
+    ofstream file("../data/enrollment.csv");
     while(!file.is_open()){
         cerr<<"Error! Cannot open the enrollment.csv file.";
         return;
