@@ -172,6 +172,9 @@ void list_available_units_for_student(){
                  << setw(20) << remain_capacity << endl;
         }
     }
+    cout << "\nPress Enter to return to menu...";
+    cin.ignore();
+    cin.get();
     cout<<endl;
 }
 
@@ -217,6 +220,9 @@ void list_enrolled_units(int student_id){
 
         }
     }
+    cout << "\nPress Enter to return to menu...";
+    cin.ignore();
+    cin.get();
 }
 
 void enroll_unit(User* student){
@@ -262,6 +268,9 @@ void enroll_unit(User* student){
 
     cout << "\nSuccess! You have enrolled in the unit: " << target_unit->unit_name << endl;
     save_all_data();
+    cout << "\nPress Enter to return to menu...";
+    cin.ignore();
+    cin.get();
 }
 
 void check_my_scores (int student_id){
@@ -334,6 +343,9 @@ void drop_unit(User* student){
                 return;
             }
         }
+    cout << "\nPress Enter to return to menu...";
+    cin.ignore();
+    cin.get();
     }
 
 unsigned long  encrypt_djb2(string password){
