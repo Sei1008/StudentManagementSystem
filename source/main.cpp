@@ -13,9 +13,9 @@ int main(){
     cout << "   STUDENT MANAGEMENT SYSTEM   " << endl;
     cout << "========================================" << endl;
     cout << "\nLoading data from files..." << endl;
-    load_user_from_csv(users_list);
-    load_unit_from_csv(units_list);
-    load_enrollment_from_csv(enrollments_list);
+    load_user_from_csv(users_list,"../data/user.csv");
+    load_unit_from_csv(units_list,"../data/unit.csv");
+    load_enrollment_from_csv(enrollments_list,"../data/enrollment.csv");
     cout << "Data loaded succesfully!"<<endl;
     //main menu
     User* current_user=nullptr;
