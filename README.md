@@ -48,6 +48,8 @@ BONUS FEATURES IMPLEMENTED:
 
 2/ Advanced Statistics
 
+3/ Rollback data
+
 KNOWN ISSUES/LIMITATIONS:
 -------------------------
 [List any known bugs or limitations]
