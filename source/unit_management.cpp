@@ -60,7 +60,7 @@ void add_new_unit(){
     cout << "\nUnit added successfully!" << endl;
     cout << "Unit ID: " << new_unit.unit_id << " - " << new_unit.unit_name << endl;
 
-    save_unit_to_csv(units_list);
+    save_unit_to_csv(units_list,"../data/unit.csv");
     
 }
 
@@ -122,7 +122,7 @@ void delete_unit(){
     if(it_to_delete != units_list.end()){
         units_list.erase(it_to_delete);
         cout<<"Delete successfully!"<<endl;
-        save_unit_to_csv(units_list);
+        save_unit_to_csv(units_list,"../data/unit.csv");
     }
 }
 
