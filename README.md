@@ -6,6 +6,7 @@ Student Management System
 GROUP INFORMATION:
 ------------------
 Group Number: ##
+
 Member 1: Truong Hao Nhien - ITITWE25014
 
 Member 2: Phan Quang Tan Loc - ITITWE25009
