@@ -175,7 +175,7 @@ void show_unit_statistic(){
     int unit_id_to_show;
     cout << "=========================================";
     cout << "\n             STATISTICS              \n";
-    cout << "=========================================";
+    cout << "========================================="<<endl;
     cout <<"Enter Unit ID to show: ";
     cin >> unit_id_to_show;
 
