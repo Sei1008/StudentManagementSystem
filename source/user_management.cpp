@@ -91,10 +91,6 @@ void teacher_menu(User* teacher){
             }
 
             case 6:
-                rollback_data();
-                break;
-
-            case 7:
                 cout << "Logging out...\n";
                 break;
 
