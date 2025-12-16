@@ -58,9 +58,10 @@ void teacher_menu(User* teacher){
         cout << "3. Delete a unit\n";
         cout << "4. List students in a unit\n";
         cout << "5. Show unit statistics\n";
-        cout << "6. Log out\n";
+        cout << "6. Rollback data\n";
+        cout << "7. Log out\n";
         cout << "==============================="<<endl;
-        cout << "Enter your choice (1-6) : ";
+        cout << "Enter your choice (1-7) : ";
         cin >> choice;
 
         switch (choice) {
@@ -90,13 +91,17 @@ void teacher_menu(User* teacher){
             }
 
             case 6:
+                rollback_data();
+                break;
+
+            case 7:
                 cout << "Logging out...\n";
                 break;
 
             default:
                 cout << "Invalid choice. Please enter a number from 1 to 6.\n";
         }
-    } while (choice != 6);
+    } while (choice != 7);
 }
 
 void student_menu(User* student){
