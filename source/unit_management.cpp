@@ -7,10 +7,11 @@
 #include <iomanip>
 
 void list_all_teaching_units_by_teacher_id(int teacher_id){
+    clearScreen();
     cout << "========================================" << endl;
     cout << "   LIST OF ALL YOUR TEACHING UNITS   " << endl;
     cout << "========================================" << endl;
-    cout << left << setw(5) <<"Unit ID"<< setw(10)<<"Unit Code"<<setw(10)<<"Unit Name"<<endl;
+    cout << left << setw(5) << "Unit ID" << setw(10)<<"Unit Code"<< setw(10) << "Unit Name" <<endl;
     for(const Unit& unit:units_list){
         if(unit.teacher_id==teacher_id){
             cout << left << setw(5) <<unit.unit_id<< setw(10)<<unit.unit_code<<setw(10)<<unit.unit_name<<endl;
@@ -32,18 +33,20 @@ int get_the_next_id(){
 }
 
 void add_new_unit(){
+    clearScreen();
     int new_teacher_id,new_capacity;
     string new_unit_code,new_unit_name;
     
     cout << "\n========================================" << endl;
     cout << "              ADD NEW UNIT               " << endl;
     cout << "========================================" << endl;
+    list_all_units();
     cin.ignore(10000,'\n');
-    cout <<"Enter New Unit Code(Ex: IT001): ";
+    cout <<"Enter Unit Code : ";
     getline(cin,new_unit_code);
-    cout <<"Enter Unit Name: ";
+    cout <<"Enter Unit Name : ";
     getline(cin,new_unit_name);
-    cout <<"Enter the Unit's Capacity: ";
+    cout <<"Enter Unit Capacity : ";
     cin>>new_capacity;
     cin.ignore(10000,'\n');
     cout <<"Enter Teacher Id: ";
@@ -103,7 +106,9 @@ vector<Unit>::iterator find_it_by_unit_id(int unit_id){
     return units_list.end();
 }
 
-void delete_unit(){
+void delete_unit(int teacher_id){
+    clearScreen();
+    list_all_teaching_units_by_teacher_id(teacher_id);
     int unit_id_to_delete;
     cin.ignore(10000,'\n');
     cout << "\n========================================" << endl;
@@ -137,21 +142,22 @@ void delete_unit(){
 
 void list_all_units(){
     cout << "=========================================";
-    cout << "\n             LIST OF UNITS            \n";
+    cout << "\n             UNITS LIST            \n";
     cout << "========================================="<<endl;
-    cout << left<<"ID"<< setw(5) << "Unit Name"<<endl;
+    cout << left<< setw(5) << "ID" << setw(15) << "Unit Code" << setw(20) << "Unit Name" <<endl;
     for(const Unit& unit:units_list){
-        cout <<left << unit.unit_id << setw(5)<<unit.unit_name<<endl;
+        cout <<left << setw(5) << unit.unit_id << setw(15) << unit.unit_code << setw(20) << unit.unit_name<<endl;
     }
 }
 
 void list_students_in_unit(){
+    clearScreen();
     int unit_id_to_list;
     cin.ignore(10000,'\n');
     cout << "=========================================";
     cout << "\n         LIST STUDENT IN UNIT        \n";
     cout << "========================================="<<endl;
-    list_all_units;
+    list_all_units();
     cout << "Enter Unit ID to list: ";
     cin >> unit_id_to_list;
 
@@ -162,9 +168,9 @@ void list_students_in_unit(){
     }
 
     vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_list);
-    cout << "Student ID" << setw(5) << "Score" <<endl;
+    cout << left << setw(10) << "Student ID" << setw(5) << "Score" <<endl;
     for(const Enrollment& list:students_list){
-        cout << list.student_id << setw(5) << list.score<<endl;
+        cout << left << setw(10) << list.student_id << setw(5) << list.score<<endl;
     }
     cout << "\nPress Enter to return to menu...";
     cin.ignore();
@@ -172,6 +178,7 @@ void list_students_in_unit(){
 }
 
 void show_unit_statistic(){
+    clearScreen();
     int unit_id_to_show;
     cout << "=========================================";
     cout << "\n             STATISTICS              \n";

@@ -19,3 +19,5 @@ unit_id,unit_code,unit_name,capacity,current_enrollment,teacher_id
 18,PSY101,Intro Psychology,60,55,103
 19,PHI101,Philosophy,40,35,104
 20,CS301,Machine Learning,40,39,105
+23,CS101,Introduction to Programming,10,0,102
+25,PSY101,Intro Spychology,10,0,101

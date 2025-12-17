@@ -25,7 +25,7 @@ User* login_user(){
 
     cout << "\n========================================" << endl;
     cout << "              LOGIN SYSTEM                " << endl;
-    cout << "==========================================" << endl;
+    cout << "========================================" << endl;
     cout << "Username: ";
     cin >> input_username;
     cout << "Password: ";
@@ -50,6 +50,7 @@ User* login_user(){
 void teacher_menu(User* teacher){
     int choice;
     do {
+        clearScreen();
         cout << "=========================================";
         cout << "\n             TEACHER MENU            \n";
         cout << "========================================="<<endl;
@@ -76,7 +77,7 @@ void teacher_menu(User* teacher){
             }
 
             case 3: {
-                delete_unit();
+                delete_unit(teacher->id);
                 break;
             }
 
@@ -103,19 +104,20 @@ void teacher_menu(User* teacher){
 void student_menu(User* student){
     int choice;
     do {
-    cout << "=========================================";
-    cout << "\n             STUDENT MENU            \n";
-    cout << "========================================="<<endl;
-    cout << "1. List available units\n";
-    cout << "2. List my enrolled units\n";
-    cout << "3. Enroll in a unit\n";
-    cout << "4. Drop a unit\n";
-    cout << "5. Check my scores\n";
-    cout << "6. Generate random score (TEST)\n";
-    cout << "7. Log out\n";
-    cout << "==============================="<<endl;
-    cout << "Enter choice : ";
-    cin >> choice;
+        clearScreen();
+        cout << "=========================================";
+        cout << "\n             STUDENT MENU            \n";
+        cout << "========================================="<<endl;
+        cout << "1. List available units\n";
+        cout << "2. List my enrolled units\n";
+        cout << "3. Enroll in a unit\n";
+        cout << "4. Drop a unit\n";
+        cout << "5. Check my scores\n";
+        cout << "6. Generate random score (TEST)\n";
+        cout << "7. Log out\n";
+        cout << "==============================="<<endl;
+        cout << "Enter choice : ";
+        cin >> choice;
     switch (choice) {
             case 1: {
             list_available_units_for_student();
@@ -144,7 +146,7 @@ void student_menu(User* student){
             }
 
             case 6: {
-
+                generate_random_scores(student->id);
                 break;
             }
             case 7: 
@@ -158,6 +160,7 @@ void student_menu(User* student){
 } 
 
 void list_available_units_for_student(){
+    clearScreen();
     cout << "==============================================================\n";
     cout << "                        All available unit                    \n";
     cout << "==============================================================\n";
@@ -198,6 +201,7 @@ Unit* find_unit_by_code(string code) {
 }
 
 void list_enrolled_units(int student_id){
+    clearScreen();
     cout << "==========================================\n";
     cout << "             My enrolled units            \n";
     cout << "==========================================\n";
@@ -227,6 +231,7 @@ void list_enrolled_units(int student_id){
 }
 
 void enroll_unit(User* student){
+    clearScreen();
     string unit_code;
     cout << "\n========================================" << endl;
     cout << "           ENROLL IN A UNIT             " << endl;
@@ -275,6 +280,7 @@ void enroll_unit(User* student){
 }
 
 void check_my_scores (int student_id){
+    clearScreen();
     cout << "\n========================================" << endl;
     cout << "                 MY SCORES                 " << endl;
     cout << "==========================================" << endl;
@@ -316,6 +322,7 @@ void check_my_scores (int student_id){
     }
 
 void drop_unit(User* student){
+        clearScreen();
         string unit_code;
         cout << "\n========================================" << endl;
         cout << "           DROP A UNIT                  " << endl;
@@ -358,6 +365,7 @@ unsigned long  encrypt_djb2(string password){
 }
 
 void generate_random_scores(int student_id) {
+    clearScreen();
     cout << "\n========================================" << endl;
     cout << "      GENERATE RANDOM SCORES (TEST)     " << endl;
     cout << "========================================" << endl;

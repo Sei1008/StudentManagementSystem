@@ -2,13 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
 void load_user_from_csv(vector<User>& users_list,const string& filename){
     ifstream file(filename);
-    units_list.clear();
-    while(!file.is_open()){
+    users_list.clear();
+    if(!file.is_open()){
         cerr<<"Error! Cannot open user.csv file."<<endl;
         return;
     }
@@ -36,7 +37,7 @@ void load_user_from_csv(vector<User>& users_list,const string& filename){
 
 void save_user_to_csv(const vector<User>& users_list,const string& filename){
     ofstream file(filename);
-    while(!file.is_open()){
+    if(!file.is_open()){
         cerr<<"Error! Cannot open user.csv for writing";
         return;
     }
@@ -57,7 +58,7 @@ void save_user_to_csv(const vector<User>& users_list,const string& filename){
 void load_unit_from_csv(vector <Unit>& units_list,const string& filename){
     ifstream file(filename);
     units_list.clear();
-    while(!file.is_open()){
+    if(!file.is_open()){
         cerr<<"Error! Cannnot open the units.csv file."<<endl;
         return;
     }
@@ -91,7 +92,7 @@ void load_unit_from_csv(vector <Unit>& units_list,const string& filename){
 
 void save_unit_to_csv(const vector<Unit>& units_list,const string& filename){
     ofstream file(filename);
-    while(!file.is_open()){
+    if(!file.is_open()){
         cerr<<"Error! Cannot open the unit.csv file."<<endl;
         return;
     }
@@ -111,7 +112,7 @@ void save_unit_to_csv(const vector<Unit>& units_list,const string& filename){
 void load_enrollment_from_csv(vector<Enrollment>& enrollments_list,const string& filename){
     ifstream file(filename);
     enrollments_list.clear();
-    while(!file.is_open()){
+    if(!file.is_open()){
         cerr<<"Error! Cannot open the enrollment.csv file."<<endl;
         return;
     }
@@ -136,7 +137,7 @@ void load_enrollment_from_csv(vector<Enrollment>& enrollments_list,const string&
 
 void save_enrollment_to_csv(const vector<Enrollment>& enrollments_list,const string& filename){
     ofstream file(filename);
-    while(!file.is_open()){
+    if(!file.is_open()){
         cerr<<"Error! Cannot open the enrollment.csv file.";
         return;
     }
@@ -176,8 +177,17 @@ void rollback_enrollment(vector <Enrollment>& enrollments_list){
 }
 
 void rollback_data(){
+    clearScreen();
     rollback_user(users_list);
     rollback_unit(units_list);
     rollback_enrollment(enrollments_list);
     cout<<"Rollback data successfully!"<<endl;
+}
+
+void clearScreen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 }
