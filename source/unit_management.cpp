@@ -118,12 +118,18 @@ void delete_unit(){
     Unit* unit_to_delete=find_unit_name_by_id(unit_id_to_delete);
 
     if(unit_to_delete==nullptr){
-        cout<<"Error! The unit id does not exist."<<endl;
+        cerr<<"\nError! The unit id does not exist."<<endl;
+        cout << "\nPress Enter to return to menu...";
+        cin.ignore();
+        cin.get();
         return;
     }
 
     if(unit_to_delete->current_enrollment>0){
-        cout<<"This unit still has students studying!"<<endl;
+        cerr<<"\nThis unit still has students studying!"<<endl;
+        cout << "\nPress Enter to return to menu...";
+        cin.ignore();
+        cin.get();
         return;
     }
 
