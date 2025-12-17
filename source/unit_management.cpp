@@ -7,6 +7,7 @@
 #include <iomanip>
 
 void list_all_teaching_units_by_teacher_id(int teacher_id){
+    clearScreen();
     cout << "========================================" << endl;
     cout << "   LIST OF ALL YOUR TEACHING UNITS   " << endl;
     cout << "========================================" << endl;
@@ -32,6 +33,7 @@ int get_the_next_id(){
 }
 
 void add_new_unit(){
+    clearScreen();
     int new_teacher_id,new_capacity;
     string new_unit_code,new_unit_name;
     
@@ -104,6 +106,7 @@ vector<Unit>::iterator find_it_by_unit_id(int unit_id){
 }
 
 void delete_unit(){
+    clearScreen();
     int unit_id_to_delete;
     cin.ignore(10000,'\n');
     cout << "\n========================================" << endl;
@@ -146,6 +149,7 @@ void list_all_units(){
 }
 
 void list_students_in_unit(){
+    clearScreen();
     int unit_id_to_list;
     cin.ignore(10000,'\n');
     cout << "=========================================";
@@ -172,6 +176,7 @@ void list_students_in_unit(){
 }
 
 void show_unit_statistic(){
+    clearScreen();
     int unit_id_to_show;
     cout << "=========================================";
     cout << "\n             STATISTICS              \n";

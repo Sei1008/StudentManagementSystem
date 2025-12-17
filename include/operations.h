@@ -26,4 +26,6 @@ void rollback_enrollment(vector <Enrollment>& enrollments_list);
 
 void rollback_data();
 
+void clearScreen();
+
 #endif

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -176,8 +177,17 @@ void rollback_enrollment(vector <Enrollment>& enrollments_list){
 }
 
 void rollback_data(){
+    clearScreen();
     rollback_user(users_list);
     rollback_unit(units_list);
     rollback_enrollment(enrollments_list);
     cout<<"Rollback data successfully!"<<endl;
+}
+
+void clearScreen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 }
