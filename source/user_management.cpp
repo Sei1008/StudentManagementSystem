@@ -48,9 +48,9 @@ User* login_user(){
 }
 
 void teacher_menu(User* teacher){
-    clearScreen();
     int choice;
     do {
+        clearScreen();
         cout << "=========================================";
         cout << "\n             TEACHER MENU            \n";
         cout << "========================================="<<endl;
@@ -106,22 +106,22 @@ void teacher_menu(User* teacher){
 }
 
 void student_menu(User* student){
-    clearScreen();
     int choice;
     do {
-    cout << "=========================================";
-    cout << "\n             STUDENT MENU            \n";
-    cout << "========================================="<<endl;
-    cout << "1. List available units\n";
-    cout << "2. List my enrolled units\n";
-    cout << "3. Enroll in a unit\n";
-    cout << "4. Drop a unit\n";
-    cout << "5. Check my scores\n";
-    cout << "6. Generate random score (TEST)\n";
-    cout << "7. Log out\n";
-    cout << "==============================="<<endl;
-    cout << "Enter choice : ";
-    cin >> choice;
+        clearScreen();
+        cout << "=========================================";
+        cout << "\n             STUDENT MENU            \n";
+        cout << "========================================="<<endl;
+        cout << "1. List available units\n";
+        cout << "2. List my enrolled units\n";
+        cout << "3. Enroll in a unit\n";
+        cout << "4. Drop a unit\n";
+        cout << "5. Check my scores\n";
+        cout << "6. Generate random score (TEST)\n";
+        cout << "7. Log out\n";
+        cout << "==============================="<<endl;
+        cout << "Enter choice : ";
+        cin >> choice;
     switch (choice) {
             case 1: {
             list_available_units_for_student();
