@@ -25,7 +25,7 @@ User* login_user(){
 
     cout << "\n========================================" << endl;
     cout << "              LOGIN SYSTEM                " << endl;
-    cout << "==========================================" << endl;
+    cout << "========================================" << endl;
     cout << "Username: ";
     cin >> input_username;
     cout << "Password: ";

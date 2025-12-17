@@ -9,8 +9,6 @@ vector<Enrollment> enrollments_list;
 
 int main(){
     //load data
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
     cout << "========================================" << endl;
     cout << "   STUDENT MANAGEMENT SYSTEM   " << endl;
     cout << "========================================" << endl;
