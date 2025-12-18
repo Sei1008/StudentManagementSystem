@@ -135,8 +135,7 @@ void delete_unit(){
 
     if(unit_to_delete != nullptr){
         string s;
-        cin.ignore(10000,'\n');
-        cout<<"Are you sure to delete "<<unit_to_delete->unit_name<<"(y/n)";
+        cout<<"Are you sure to delete "<<unit_to_delete->unit_name<<"(y/n):";
         getline(cin,s);
         if(s != "y" && s != "Y") return;
     }
