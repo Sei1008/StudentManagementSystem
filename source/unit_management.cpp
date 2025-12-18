@@ -159,7 +159,7 @@ void list_students_in_unit(){
         cout << "Error! Can't find the Unit."<<endl;
         return;
     }
-
+    cout << "========================================="<<endl;
     vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_list);
     cout <<left<<setw(5)<< "ID" << setw(10) << "Score"<<setw(10) <<endl;
     for(const Enrollment& list:students_list){
