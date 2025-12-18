@@ -63,51 +63,42 @@ void teacher_menu(User* teacher){
         cout << "7. Log out\n";
         cout << "==============================="<<endl;
         cout << "Enter your choice (1-7) : ";
-        cin >> choice;
+        
+        while(!(cin>>choice)){
+            cout<<"Error! Please enter number from 1 to 7: ";
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cin>>choice;
+        }
 
         switch (choice) {
-            case 1: {
+            case 1: 
                 list_all_teaching_units_by_teacher_id(teacher->id);
-                return_menu();
                 break;
-            }
-
-            case 2: {
+            case 2: 
                 add_new_unit();
-                return_menu();
                 break;
-            }
-
-            case 3: {
+            case 3: 
                 delete_unit();
-                return_menu();
                 break;
-            }
-
-            case 4: {
+            case 4: 
                 list_students_in_unit();
-                return_menu();
                 break;
-            }
-
-            case 5: {
+            case 5:
                 show_unit_statistic();
-                return_menu();
                 break;
-            }
-
             case 6:
                 rollback_data();
-                return_menu;
                 break;
-
             case 7:
                 cout << "Logging out...\n";
                 break;
 
             default:
-                cout << "Invalid choice. Please enter a number from 1 to 6.\n";
+                cout << "\nInvalid choice. Please enter a number from 1 to 6.\n";
+                break;
         }
+        if(choice != 7) return_menu();
     } while (choice != 7);
 }
 
@@ -127,55 +118,44 @@ void student_menu(User* student){
         cout << "7. Log out\n";
         cout << "==============================="<<endl;
         cout << "Enter choice : ";
-        cin >> choice;
+   
+        while(!(cin>>choice)){
+            cout<<"Error! Please enter number from 1 to 7: ";
+            cin.clear();
+            cin.ignore(10000,'\n');
+        }
+
     switch (choice) {
-            case 1: {
+            case 1: 
                 list_available_units_for_student();
-                return_menu();
                 break;
-            }
-
-            case 2: {
+            case 2: 
                 list_enrolled_units(student->id);
-                return_menu();
                 break;
-            }
-
-            case 3: {
+            case 3: 
                 if (get_student_enrollment_count(student->id) == MAX_STUDENT_UNITS){
                     cout << "\nYou have reached the maximum enrollment limit (" << MAX_STUDENT_UNITS << " units)." << endl;
-                    return_menu();
                     break;
                 }
                 enroll_unit(student);    
-                return_menu();
                 break;
-            }
-
-            case 4: {
+            case 4: 
                 drop_unit(student);
-                return_menu();   
                 break;
-            }
-
-            case 5: {
+            case 5: 
                 check_my_scores(student->id);
-                return_menu();
                 break;
-            }
-
-            case 6: {
+            case 6: 
                 generate_random_scores(student->id);
-                return_menu();
                 break;
-            }
             case 7: 
                 cout << "Logging out...\n";
                 break;
             default:
-                cout << "Invalid choice. Please enter a number from 1 to 7.\n";
-
+                cout << "\nInvalid choice. Please enter a number from 1 to 7.\n";
+                break;
 }
+        if(choice != 7) return_menu();
     } while (choice != 7);
 } 
 
