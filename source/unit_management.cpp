@@ -161,9 +161,9 @@ void list_students_in_unit(){
     }
 
     vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_list);
-    cout << "Student ID" << setw(5) << "Score" <<endl;
+    cout <<left<<setw(5)<< "ID" << setw(10) << "Score"<<setw(10) <<endl;
     for(const Enrollment& list:students_list){
-        cout << list.student_id << setw(5) << list.score<<endl;
+        cout <<left<<setw(5)<< list.student_id << setw(10) << list.score<<setw(10)<<endl;
     }
 }
 
