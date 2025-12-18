@@ -86,7 +86,7 @@ void teacher_menu(User* teacher){
                 list_students_in_unit();
                 break;
             case 5:
-                show_unit_statistic();
+                show_unit_statistic(teacher->id);
                 break;
             case 6:
                 rollback_data();

@@ -13,5 +13,5 @@ vector<Unit>::iterator find_it_by_unit_id(int unit_id);
 void delete_unit();
 void list_all_units();
 void list_students_in_unit();
-void show_unit_statistic();
+void show_unit_statistic(int teacher_id);
 #endif
