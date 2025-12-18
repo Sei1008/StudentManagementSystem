@@ -11,7 +11,7 @@ void list_all_teaching_units_by_teacher_id(int teacher_id){
     cout << "========================================" << endl;
     cout << "   LIST OF ALL YOUR TEACHING UNITS   " << endl;
     cout << "========================================" << endl;
-    cout << left << setw(5) <<"Unit ID"<< setw(10)<<"Unit Code"<<setw(10)<<"Unit Name"<<endl;
+    cout << left << setw(5) <<"ID"<< setw(10)<<"Unit Code"<<setw(10)<<"Unit Name"<<endl;
     for(const Unit& unit:units_list){
         if(unit.teacher_id==teacher_id){
             cout << left << setw(5) <<unit.unit_id<< setw(10)<<unit.unit_code<<setw(10)<<unit.unit_name<<endl;
@@ -37,8 +37,19 @@ void add_new_unit(){
     cout << "\n========================================" << endl;
     cout << "              ADD NEW UNIT               " << endl;
     cout << "========================================" << endl;
+    cout <<left<<setw(10)<<"Code"<<setw(30)<<"Name"<<endl;
+    for(const Unit& unit:units_list){
+        cout<<left<<setw(10)<<unit.unit_code<<setw(30)<<unit.unit_name<<endl;
+    }
     cout <<"Enter New Unit Code(Ex: IT001): ";
     getline(cin,new_unit_code);
+
+    Unit* find=find_unit_by_code(new_unit_code);
+    if(find != nullptr){
+        cout<<"This code already exists. Please try again!"<<endl;
+        return;
+    }
+
     cout <<"Enter Unit Name: ";
     getline(cin,new_unit_name);
     cout <<"Enter the Unit's Capacity: ";
@@ -103,9 +114,13 @@ void delete_unit(){
     cout << "\n========================================" << endl;
     cout << "            DELETE UNIT                 " << endl;
     cout << "========================================" << endl;
+    cout << left << setw(5) << "ID" << setw(10)<<"Name"<<endl;
+    for(const Unit& unit: units_list){
+            cout<<left<<setw(5)<<unit.unit_id<<setw(10)<<unit.unit_name<<endl;
+    }
     cout << "Enter Unit ID to delete: ";
     cin>>unit_id_to_delete;
-
+    cin.ignore(10000,'\n');
     Unit* unit_to_delete=find_unit_name_by_id(unit_id_to_delete);
 
     if(unit_to_delete==nullptr){

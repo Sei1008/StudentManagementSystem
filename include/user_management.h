@@ -10,7 +10,7 @@ User* login_user();
 User* find_user_by_username(string username);
 
 Unit* find_unit_name_by_id(int unit_id);
-Unit* find_unit_by_code(string code);
+Unit* find_unit_by_code(string s);
 
 void enroll_unit(User* student);
 void list_available_units_for_student();

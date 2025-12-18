@@ -192,9 +192,13 @@ Unit* find_unit_name_by_id(int unit_id){
     return nullptr;
 }
 
-Unit* find_unit_by_code(string code) {
-    for (Unit& unit : units_list) {
-        if (unit.unit_code == code) { 
+Unit* find_unit_by_code(string s) {
+    string a=s;
+    for(char &a:a){
+        a=toupper(a);
+    }
+    for(Unit& unit:units_list){
+        if(unit.unit_code==a){
             return &unit;
         }
     }
