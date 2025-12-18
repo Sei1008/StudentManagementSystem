@@ -37,7 +37,6 @@ void add_new_unit(){
     cout << "\n========================================" << endl;
     cout << "              ADD NEW UNIT               " << endl;
     cout << "========================================" << endl;
-    cin.ignore(10000,'\n');
     cout <<"Enter New Unit Code(Ex: IT001): ";
     getline(cin,new_unit_code);
     cout <<"Enter Unit Name: ";
@@ -101,7 +100,6 @@ vector<Unit>::iterator find_it_by_unit_id(int unit_id){
 void delete_unit(){
     clearScreen();
     int unit_id_to_delete;
-    cin.ignore(10000,'\n');
     cout << "\n========================================" << endl;
     cout << "            DELETE UNIT                 " << endl;
     cout << "========================================" << endl;
@@ -122,9 +120,10 @@ void delete_unit(){
 
     if(unit_to_delete != nullptr){
         string s;
+        cin.ignore(10000,'\n');
         cout<<"Are you sure to delete "<<unit_to_delete->unit_name<<"(y/n)";
         getline(cin,s);
-        if(s != "y" || s != "Y") return;
+        if(s != "y" && s != "Y") return;
     }
 
     vector<Unit>::iterator it_to_delete=find_it_by_unit_id(unit_id_to_delete);
@@ -148,14 +147,13 @@ void list_all_units(){
 void list_students_in_unit(){
     clearScreen();
     int unit_id_to_list;
-    cin.ignore(10000,'\n');
     cout << "=========================================";
     cout << "\n         LIST STUDENT IN UNIT        \n";
     cout << "========================================="<<endl;
     list_all_units;
     cout << "Enter Unit ID to list: ";
     cin >> unit_id_to_list;
-
+    cin.ignore(10000,'\n');
     Unit* find_unit=find_unit_name_by_id(unit_id_to_list);
     if(find_unit==nullptr){
         cout << "Error! Can't find the Unit."<<endl;
@@ -177,7 +175,7 @@ void show_unit_statistic(){
     cout << "========================================="<<endl;
     cout <<"Enter Unit ID to show: ";
     cin >> unit_id_to_show;
-
+    cin.ignore(10000,'\n');
     Unit* find_unit=find_unit_name_by_id(unit_id_to_show);
     if(find_unit == nullptr){
         cout <<"Error! Cannot find the Unit."<<endl;
@@ -192,9 +190,9 @@ void show_unit_statistic(){
     int count_pass=0;
     int count_npass=0;
     cout << "========================================="<<endl;
-    cout << "Student ID" << setw(10) << "Scores" << setw(5) << "Status" << endl;
+    cout <<left<<setw(5)<< "ID" << setw(10) << "Scores" << setw(5) << "Status" << endl;
     for(const Enrollment& cal: students_list){
-        cout << cal.student_id << setw(10) << cal.score <<setw(5);
+        cout <<left<<setw(5)<< cal.student_id << setw(10) << cal.score <<setw(5);
         if(cal.score >=50){
             cout<<"PASSED"<<endl;
             count_pass++;

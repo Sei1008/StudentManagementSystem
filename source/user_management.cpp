@@ -68,8 +68,9 @@ void teacher_menu(User* teacher){
             cout<<"Error! Please enter number from 1 to 7: ";
             cin.clear();
             cin.ignore(10000,'\n');
-            cin>>choice;
         }
+
+        cin.ignore(10000,'\n');
 
         switch (choice) {
             case 1: 
@@ -124,6 +125,8 @@ void student_menu(User* student){
             cin.clear();
             cin.ignore(10000,'\n');
         }
+
+        cin.ignore(10000,'\n');
 
     switch (choice) {
             case 1: 
@@ -231,7 +234,6 @@ void enroll_unit(User* student){
     cout << "========================================" << endl; 
 
     list_available_units_for_student();
-    cin.ignore (10000,'\n');
 
     cout << "\nEnter unit code to enroll : ";
     getline (cin,unit_code);
@@ -315,7 +317,6 @@ void drop_unit(User* student){
         cout << "           DROP A UNIT                  " << endl;
         cout << "========================================" << endl;
         list_enrolled_units(student->id);
-        cin.ignore (10000,'\n'); 
         cout << "\nEnter Unit Code to drop: ";
         getline (cin, unit_code); 
         
@@ -334,7 +335,7 @@ void drop_unit(User* student){
             string s;
             cout<<"Are you sure to drop "<< target_unit->unit_name<<"(y/n): ";
             getline(cin,s);
-            if(s != "y" || s != "y") return;
+            if(s != "y" && s != "Y") return;
         }
 
         for (auto it = enrollments_list.begin(); it != enrollments_list.end();it++){
