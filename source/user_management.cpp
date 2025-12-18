@@ -165,13 +165,15 @@ void list_available_units_for_student(){
     cout << "                        All available unit                    \n";
     cout << "==============================================================\n";
     cout << left << setw(10) << "Unit ID" 
+         << setw(10) << "Unit Code"
          << setw(30) << "Unit Name"         
          << setw(20) << "Remain capacity" << endl;
     cout << "--------------------------------------------------------------\n";
     for (const Unit& unit : units_list){
         int remain_capacity = unit.capacity - unit.current_enrollment;
         if(remain_capacity > 0){
-            cout << left << setw(10) << unit.unit_id 
+            cout << left << setw(10) << unit.unit_id
+                 << setw(10) << unit.unit_code 
                  << setw(30) << unit.unit_name 
                  << setw(20) << remain_capacity << endl;
         }
@@ -180,6 +182,25 @@ void list_available_units_for_student(){
     cin.ignore();
     cin.get();
     cout<<endl;
+}
+void display_unit_list(){
+    cout << "==============================================================\n";
+    cout << "                        All available unit                    \n";
+    cout << "==============================================================\n";
+    cout << left << setw(10) << "Unit ID" 
+         << setw(10) << "Unit Code"
+         << setw(30) << "Unit Name"         
+         << setw(20) << "Remain capacity" << endl;
+    cout << "--------------------------------------------------------------\n";
+    for (const Unit& unit : units_list){
+        int remain_capacity = unit.capacity - unit.current_enrollment;
+        if(remain_capacity > 0){
+            cout << left << setw(10) << unit.unit_id
+                 << setw(10) << unit.unit_code 
+                 << setw(30) << unit.unit_name 
+                 << setw(20) << remain_capacity << endl;
+        }
+    } 
 }
 
 Unit* find_unit_name_by_id(int unit_id){
@@ -206,20 +227,18 @@ void list_enrolled_units(int student_id){
     cout << "             My enrolled units            \n";
     cout << "==========================================\n";
 
-    cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << setw(10) << "Score" << endl;
+    cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << endl;
     for (const Enrollment& enrolled : enrollments_list){
         if(enrolled.student_id == student_id){
             Unit* unit_ptr = find_unit_name_by_id(enrolled.unit_id);
             if (unit_ptr != nullptr){
                 cout << left << setw(10) << unit_ptr->unit_id
                      << setw(20) << unit_ptr->unit_code
-                     << setw(30) << unit_ptr->unit_name
-                     << setw(10) << enrolled.score << endl;
+                     << setw(30) << unit_ptr->unit_name << endl;
             } else {
                 cout << left << setw(10) << enrolled.unit_id
                      << setw(20) << "Unknown"
-                     << setw(30) << "Unknown unit"
-                     << setw(10) << enrolled.score << endl;
+                     << setw(30) << "Unknown unit" << endl;
             }
 
 
@@ -237,30 +256,39 @@ void enroll_unit(User* student){
     cout << "           ENROLL IN A UNIT             " << endl;
     cout << "========================================" << endl; 
 
-    list_available_units_for_student();
-    cin.ignore (10000,'\n');
+    display_unit_list();
 
     cout << "\nEnter unit code to enroll : ";
+    cin.ignore (1000,'\n');
+
     getline (cin,unit_code);
 
     if (get_student_enrollment_count(student->id) == MAX_STUDENT_UNITS){
         cout << "You have reached the maximum enrollment limit (" << MAX_STUDENT_UNITS << " units)." << endl;
+        cout << "Press enter to continue...";
+                cin.get();
         return;
     }
 
     Unit* target_unit = find_unit_by_code(unit_code);
     if (target_unit == nullptr){
         cout << "Error! Unit code '" << unit_code << "' not found." << endl;
+        cout << "Press enter to continue...";
+        cin.get();
         return;
     }
 
     if (is_student_enrolled_in(student->id, target_unit->unit_id)){
         cout << "Error! You are already enrolled in this unit." << endl;
+        cout << "Press enter to continue...";
+                cin.get();
         return;
     }
 
     if (is_unit_full(*target_unit)){
         cout << "Error! Unit '" << unit_code << "' is full (Capacity: " << target_unit->capacity << ")." << endl;
+        cout << "Press enter to continue...";
+                cin.get();
         return;
     }
     
@@ -335,11 +363,15 @@ void drop_unit(User* student){
         Unit* target_unit = find_unit_by_code(unit_code);
         if (target_unit == nullptr){
             cout << "Error! Unit code '" << unit_code << "' not found." << endl;
+            cout << "Press enter to continue...";
+            cin.get();
             return;
         }
 
         if (!is_student_enrolled_in(student->id,target_unit->unit_id)){
             cout << "Error! You are not enrolled in this unit." << endl;
+            cout << "Press enter to continue...";
+            cin.get();
             return;
         }
         for (auto it = enrollments_list.begin(); it != enrollments_list.end();it++){
@@ -348,12 +380,11 @@ void drop_unit(User* student){
                 cout << "\nSuccess! Dropped Unit: " << target_unit->unit_name << endl;
                 target_unit->current_enrollment--;
                 save_all_data(); 
+                cout << "Press enter to continue...";
+                cin.get();
                 return;
             }
         }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
     }
 
 unsigned long  encrypt_djb2(string password){
@@ -385,11 +416,13 @@ void generate_random_scores(int student_id) {
             cout << "Generated score for " << unit_name << ": " << random_score << endl;
         }
     }
-
     if (updated) {
         cout << "\nAll pending units have been graded!" << endl;
         save_all_data(); 
     } else {
         cout << "\nYou have no units waiting for grades (or you haven't enrolled in any)." << endl;
     }
+    cout << "\nPress Enter to return to menu...";
+    cin.ignore();
+    cin.get();
 }

@@ -4,11 +4,11 @@ unit_id,unit_code,unit_name,capacity,current_enrollment,teacher_id
 3,CS103,Algorithms,50,40,103
 4,CS104,Database Systems,50,35,104
 5,CS105,Operating Systems,50,42,105
-6,MAT101,Calculus I,60,55,101
+6,MAT101,Calculus I,60,56,101
 7,MAT102,Linear Algebra,60,50,102
-8,ENG101,Academic Writing,40,38,103
+8,ENG101,Academic Writing,40,37,103
 9,PHY101,General Physics,55,45,104
-10,CHE101,General Chemistry,55,40,105
+10,CHE101,General Chemistry,55,39,105
 11,BIO101,Biology Basics,60,58,101
 12,HIS101,World History,40,30,102
 13,ART101,Art Appreciation,30,25,103
@@ -17,7 +17,5 @@ unit_id,unit_code,unit_name,capacity,current_enrollment,teacher_id
 16,BUS101,Intro to Business,70,65,101
 17,ECO101,Microeconomics,70,60,102
 18,PSY101,Intro Psychology,60,55,103
-19,PHI101,Philosophy,40,35,104
+19,PHI101,Philosophy,40,36,104
 20,CS301,Machine Learning,40,39,105
-23,CS101,Introduction to Programming,10,0,102
-25,PSY101,Intro Spychology,10,0,101
