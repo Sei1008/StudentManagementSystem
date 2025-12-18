@@ -28,4 +28,6 @@ void rollback_data();
 
 void clearScreen();
 
+void return_menu();
+
 #endif

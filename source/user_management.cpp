@@ -67,32 +67,38 @@ void teacher_menu(User* teacher){
 
         switch (choice) {
             case 1: {
-                list_all_teaching_units_by_teacher_id(teacher->id); 
+                list_all_teaching_units_by_teacher_id(teacher->id);
+                return_menu();
                 break;
             }
 
             case 2: {
                 add_new_unit();
+                return_menu();
                 break;
             }
 
             case 3: {
                 delete_unit();
+                return_menu();
                 break;
             }
 
             case 4: {
                 list_students_in_unit();
+                return_menu();
                 break;
             }
 
             case 5: {
                 show_unit_statistic();
+                return_menu();
                 break;
             }
 
             case 6:
                 rollback_data();
+                return_menu;
                 break;
 
             case 7:
@@ -124,33 +130,43 @@ void student_menu(User* student){
         cin >> choice;
     switch (choice) {
             case 1: {
-            list_available_units_for_student();
-    
+                list_available_units_for_student();
+                return_menu();
                 break;
             }
 
             case 2: {
-            list_enrolled_units(student->id);
+                list_enrolled_units(student->id);
+                return_menu();
                 break;
             }
 
             case 3: {
-            enroll_unit(student);    
+                if (get_student_enrollment_count(student->id) == MAX_STUDENT_UNITS){
+                    cout << "\nYou have reached the maximum enrollment limit (" << MAX_STUDENT_UNITS << " units)." << endl;
+                    return_menu();
+                    break;
+                }
+                enroll_unit(student);    
+                return_menu();
                 break;
             }
 
             case 4: {
-            drop_unit(student);    
+                drop_unit(student);
+                return_menu();   
                 break;
             }
 
             case 5: {
                 check_my_scores(student->id);
+                return_menu();
                 break;
             }
 
             case 6: {
                 generate_random_scores(student->id);
+                return_menu();
                 break;
             }
             case 7: 
@@ -180,10 +196,6 @@ void list_available_units_for_student(){
                  << setw(20) << remain_capacity << endl;
         }
     }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
-    cout<<endl;
 }
 
 Unit* find_unit_name_by_id(int unit_id){
@@ -229,9 +241,6 @@ void list_enrolled_units(int student_id){
 
         }
     }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
 }
 
 void enroll_unit(User* student){
@@ -278,16 +287,13 @@ void enroll_unit(User* student){
 
     cout << "\nSuccess! You have enrolled in the unit: " << target_unit->unit_name << endl;
     save_all_data();
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
 }
 
 void check_my_scores (int student_id){
     clearScreen();
-    cout << "\n========================================" << endl;
-    cout << "                 MY SCORES                 " << endl;
-    cout << "==========================================" << endl;
+    cout << "\n================================================================" << endl;
+    cout << "                           MY SCORES                 " << endl;
+    cout << "================================================================" << endl;
     cout << left << setw(10) << "Unit ID" 
          << left << setw(15) << "Unit Code" 
          << left << setw(30) << "Unit Name" 
@@ -320,9 +326,6 @@ void check_my_scores (int student_id){
     if (!found_any) {
         cout << "\nYou have not enrolled in any units yet." << endl;
     }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
     }
 
 void drop_unit(User* student){
@@ -346,6 +349,14 @@ void drop_unit(User* student){
             cout << "Error! You are not enrolled in this unit." << endl;
             return;
         }
+
+        if(target_unit != nullptr){
+            string s;
+            cout<<"Are you sure to drop "<< target_unit->unit_name<<"(y/n): ";
+            getline(cin,s);
+            if(s != "y" || s != "y") return;
+        }
+
         for (auto it = enrollments_list.begin(); it != enrollments_list.end();it++){
             if (it->student_id == student->id && it->unit_id == target_unit->unit_id){
                 it = enrollments_list.erase(it);
@@ -355,9 +366,6 @@ void drop_unit(User* student){
                 return;
             }
         }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
     }
 
 unsigned long  encrypt_djb2(string password){

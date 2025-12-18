@@ -191,3 +191,9 @@ void clearScreen() {
         system("clear");
     #endif
 }
+
+void  return_menu(){
+    cout << "\nPress Enter to return to menu...\n";
+    cin.ignore();
+    cin.get();
+}

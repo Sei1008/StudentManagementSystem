@@ -17,9 +17,6 @@ void list_all_teaching_units_by_teacher_id(int teacher_id){
             cout << left << setw(5) <<unit.unit_id<< setw(10)<<unit.unit_code<<setw(10)<<unit.unit_name<<endl;
         }
     }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
 }
 
 int get_the_next_id(){
@@ -65,11 +62,7 @@ void add_new_unit(){
     cout << "\nUnit added successfully!" << endl;
     cout << "Unit ID: " << new_unit.unit_id << " - " << new_unit.unit_name << endl;
 
-    save_unit_to_csv(units_list,"../data/unit.csv");
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
-    
+    save_unit_to_csv(units_list,"../data/unit.csv");    
 }
 
 bool is_unit_full(const Unit& unit){
@@ -119,18 +112,19 @@ void delete_unit(){
 
     if(unit_to_delete==nullptr){
         cerr<<"\nError! The unit id does not exist."<<endl;
-        cout << "\nPress Enter to return to menu...";
-        cin.ignore();
-        cin.get();
         return;
     }
 
     if(unit_to_delete->current_enrollment>0){
         cerr<<"\nThis unit still has students studying!"<<endl;
-        cout << "\nPress Enter to return to menu...";
-        cin.ignore();
-        cin.get();
         return;
+    }
+
+    if(unit_to_delete != nullptr){
+        string s;
+        cout<<"Are you sure to delete "<<unit_to_delete->unit_name<<"(y/n)";
+        getline(cin,s);
+        if(s != "y" || s != "Y") return;
     }
 
     vector<Unit>::iterator it_to_delete=find_it_by_unit_id(unit_id_to_delete);
@@ -139,9 +133,6 @@ void delete_unit(){
         cout<<"Delete successfully!"<<endl;
         save_unit_to_csv(units_list,"../data/unit.csv");
     }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
 }
 
 void list_all_units(){
@@ -176,9 +167,6 @@ void list_students_in_unit(){
     for(const Enrollment& list:students_list){
         cout << list.student_id << setw(5) << list.score<<endl;
     }
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
 }
 
 void show_unit_statistic(){
@@ -227,7 +215,4 @@ void show_unit_statistic(){
     cout << "Average Score: "<< fixed << setprecision(2) << (double)sum/count <<endl;
     cout << "Pass Rate: "<< fixed << setprecision(2) << (double)count_pass/count*100 << "%" <<endl;
     cout << "Failure Rate: "<< fixed << setprecision(2) << (double)count_npass/count*100 << "%" <<endl;
-    cout << "\nPress Enter to return to menu...";
-    cin.ignore();
-    cin.get();
 }
