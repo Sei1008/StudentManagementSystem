@@ -164,7 +164,8 @@ void list_available_units_for_student(){
     cout << "==============================================================\n";
     cout << "                        All available unit                    \n";
     cout << "==============================================================\n";
-    cout << left << setw(10) << "Unit ID" 
+    cout << left << setw(10) << "Unit ID"
+         << setw(15) << "Unit Code" 
          << setw(30) << "Unit Name"         
          << setw(20) << "Remain capacity" << endl;
     cout << "--------------------------------------------------------------\n";
@@ -172,6 +173,7 @@ void list_available_units_for_student(){
         int remain_capacity = unit.capacity - unit.current_enrollment;
         if(remain_capacity > 0){
             cout << left << setw(10) << unit.unit_id 
+                 << setw(15) << unit.unit_code
                  << setw(30) << unit.unit_name 
                  << setw(20) << remain_capacity << endl;
         }
@@ -202,7 +204,7 @@ void list_enrolled_units(int student_id){
     cout << "             My enrolled units            \n";
     cout << "==========================================\n";
 
-    cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << setw(10) << "Score" << endl;
+    cout << left << setw(10) << "Unit ID" << setw(20) << "Unit Code" << setw(30) << "Unit Name" << endl;
     for (const Enrollment& enrolled : enrollments_list){
         if(enrolled.student_id == student_id){
             Unit* unit_ptr = find_unit_name_by_id(enrolled.unit_id);
@@ -210,12 +212,12 @@ void list_enrolled_units(int student_id){
                 cout << left << setw(10) << unit_ptr->unit_id
                      << setw(20) << unit_ptr->unit_code
                      << setw(30) << unit_ptr->unit_name
-                     << setw(10) << enrolled.score << endl;
+                     << setw(10)  << endl;
             } else {
                 cout << left << setw(10) << enrolled.unit_id
                      << setw(20) << "Unknown"
                      << setw(30) << "Unknown unit"
-                     << setw(10) << enrolled.score << endl;
+                     << setw(10) << endl;
             }
 
 
