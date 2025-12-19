@@ -5,7 +5,7 @@ Student Management System
 
 GROUP INFORMATION:
 ------------------
-Group Number: ##
+Group Number: 12
 
 Member 1: Truong Hao Nhien - ITITWE25014
 
@@ -53,8 +53,8 @@ BONUS FEATURES IMPLEMENTED:
 
 KNOWN ISSUES/LIMITATIONS:
 -------------------------
-[List any known bugs or limitations]
+None
 
 ADDITIONAL NOTES:
 -----------------
-[Any other information the marker should know]
+None
