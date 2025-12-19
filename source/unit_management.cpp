@@ -211,7 +211,6 @@ void print_teaching_units_by_teacher_id(int teacher_id){
     }
 }
 
-
 void show_unit_statistic(int teacher_id){
     clearScreen();
     int unit_id_to_show;
@@ -227,7 +226,7 @@ void show_unit_statistic(int teacher_id){
         cout <<"Error! Cannot find the Unit."<<endl;
         return;
     }
-
+    clearScreen();
     vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_show);
     int count=students_list.size();
     int sum=0;
