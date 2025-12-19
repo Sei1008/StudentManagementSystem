@@ -11,10 +11,10 @@ void list_all_teaching_units_by_teacher_id(int teacher_id){
     cout << "========================================" << endl;
     cout << "   LIST OF ALL YOUR TEACHING UNITS   " << endl;
     cout << "========================================" << endl;
-    cout << left << setw(5) <<"ID"<< setw(10)<<"Unit Code"<<setw(10)<<"Unit Name"<<endl;
+    cout << left << setw(5) <<"ID"<< setw(15)<<"Unit Code"<<setw(20)<<"Unit Name"<<endl;
     for(const Unit& unit:units_list){
         if(unit.teacher_id==teacher_id){
-            cout << left << setw(5) <<unit.unit_id<< setw(10)<<unit.unit_code<<setw(10)<<unit.unit_name<<endl;
+            cout << left << setw(5) <<unit.unit_id<< setw(15)<<unit.unit_code<<setw(20)<<unit.unit_name<<endl;
         }
     }
 }
@@ -37,6 +37,7 @@ void add_new_unit(){
     cout << "\n========================================" << endl;
     cout << "              ADD NEW UNIT               " << endl;
     cout << "========================================" << endl;
+    cout << "============ ALL EXISTED UNIT ============" << endl;
     cout <<left<<setw(10)<<"Code"<<setw(30)<<"Name"<<endl;
     for(const Unit& unit:units_list){
         cout<<left<<setw(10)<<unit.unit_code<<setw(30)<<unit.unit_name<<endl;
@@ -114,9 +115,16 @@ void delete_unit(){
     cout << "\n========================================" << endl;
     cout << "            DELETE UNIT                 " << endl;
     cout << "========================================" << endl;
-    cout << left << setw(5) << "ID" << setw(10)<<"Name"<<endl;
+    cout << left << setw(5) << "ID" << setw(25)<<"Name"<< setw(9) << "Capacity" << setw(9) << "Status" <<endl;
     for(const Unit& unit: units_list){
-            cout<<left<<setw(5)<<unit.unit_id<<setw(10)<<unit.unit_name<<endl;
+            cout<<left<<setw(5)<<unit.unit_id<<setw(25)<<unit.unit_name 
+            << setw(9) << unit.capacity << setw(14);
+            if(unit.current_enrollment > 0){
+                cout << "Active" << endl;
+            }
+            else {
+                cout << "Inactive" << endl;
+            }
     }
     cout << "Enter Unit ID to delete: ";
     cin>>unit_id_to_delete;
@@ -152,9 +160,9 @@ void list_all_units(){
     cout << "=========================================";
     cout << "\n             LIST OF UNITS            \n";
     cout << "========================================="<<endl;
-    cout << left<<"ID"<< setw(5) << "Unit Name"<<endl;
+    cout << left << setw(12) <<"ID"<< setw(25) << "Unit Name"<<endl;
     for(const Unit& unit:units_list){
-        cout <<left << unit.unit_id << setw(5)<<unit.unit_name<<endl;
+        cout <<left << setw(12) << unit.unit_id << setw(25)<<unit.unit_name<<endl;
     }
 }
 
@@ -164,7 +172,8 @@ void list_students_in_unit(){
     cout << "=========================================";
     cout << "\n         LIST STUDENT IN UNIT        \n";
     cout << "========================================="<<endl;
-    list_all_units;
+    list_all_units();
+    cout << endl;
     cout << "Enter Unit ID to list: ";
     cin >> unit_id_to_list;
     cin.ignore(10000,'\n');
@@ -175,18 +184,41 @@ void list_students_in_unit(){
     }
     cout << "========================================="<<endl;
     vector<Enrollment> students_list=find_enrollments_by_unit_id(unit_id_to_list);
-    cout <<left<<setw(5)<< "ID" << setw(10) << "Score"<<setw(10) <<endl;
+    if (students_list.empty()){
+        cout << "No one has enrolled in this unit" << endl;
+        return;
+    }
+    else{
+    cout <<left<<setw(15)<< "Student ID" << setw(15) << "Score" <<endl;
     for(const Enrollment& list:students_list){
-        cout <<left<<setw(5)<< list.student_id << setw(10) << list.score<<setw(10)<<endl;
+        cout <<left<<setw(15)<< list.student_id << setw(15) << list.score<<endl;
+    }
     }
 }
 
-void show_unit_statistic(){
+void print_teaching_units_by_teacher_id(int teacher_id){
+    cout << "======================================" << endl;
+    cout << "     LIST OF ALL YOUR TEACHING UNITS     " << endl;
+    cout << "======================================" << endl;
+    cout << left << setw(5) << "ID" << setw(15) << "Unit Code" << setw(20) << "Unit Name" << endl;
+
+    for(const Unit& unit : units_list){
+        if(unit.teacher_id == teacher_id){
+            cout << left << setw(5) << unit.unit_id
+                 << setw(15) << unit.unit_code
+                 << setw(20) << unit.unit_name << endl;
+        }
+    }
+}
+
+
+void show_unit_statistic(int teacher_id){
     clearScreen();
     int unit_id_to_show;
     cout << "=========================================";
     cout << "\n             STATISTICS              \n";
     cout << "========================================="<<endl;
+    print_teaching_units_by_teacher_id(teacher_id);
     cout <<"Enter Unit ID to show: ";
     cin >> unit_id_to_show;
     cin.ignore(10000,'\n');
@@ -204,9 +236,11 @@ void show_unit_statistic(){
     int count_pass=0;
     int count_npass=0;
     cout << "========================================="<<endl;
-    cout <<left<<setw(5)<< "ID" << setw(10) << "Scores" << setw(5) << "Status" << endl;
+    cout << "Unit ID :" << setw(10) << find_unit->unit_id << setw(15) << find_unit->unit_name << endl;
+    cout << "-------------------------------------------" << endl;
+    cout <<left<<setw(15)<< "Student ID" << setw(15) << "Scores" << setw(5) << "Status" << endl;
     for(const Enrollment& cal: students_list){
-        cout <<left<<setw(5)<< cal.student_id << setw(10) << cal.score <<setw(5);
+        cout <<left<<setw(15)<< cal.student_id << setw(15) << cal.score << setw(5);
         if(cal.score >=50){
             cout<<"PASSED"<<endl;
             count_pass++;
@@ -217,7 +251,8 @@ void show_unit_statistic(){
         if(cal.score>max) max=cal.score;
         if(cal.score<min) min=cal.score;
         sum += cal.score;
-    }
+} 
+if (count > 0){
     cout << "========================================="<<endl;
     cout << "         SUMMARY STATISTICS REPORT       " <<endl;
     cout << "-----------------------------------------"<<endl;
@@ -227,4 +262,18 @@ void show_unit_statistic(){
     cout << "Average Score: "<< fixed << setprecision(2) << (double)sum/count <<endl;
     cout << "Pass Rate: "<< fixed << setprecision(2) << (double)count_pass/count*100 << "%" <<endl;
     cout << "Failure Rate: "<< fixed << setprecision(2) << (double)count_npass/count*100 << "%" <<endl;
+}
+else {
+    cout << "-------------------------------------------" << endl;
+    cout << "No one has enrolled in this unit!" << endl;
+    cout << "===============================" << endl;
+    cout << "       SUMMARY STATISTICS REPORT       " << endl;
+    cout << "------------------------------" << endl;
+    cout << "Number Of Students: 0" << endl;
+    cout << "Highest Score: N/A" << endl;
+    cout << "Lowest Score: N/A" << endl;
+    cout << "Average Score: N/A" << endl;
+    cout << "Pass Rate: N/A" << endl;
+    cout << "Failure Rate: N/A" << endl;
+}
 }
