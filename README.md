@@ -53,7 +53,9 @@ BONUS FEATURES IMPLEMENTED:
 
 KNOWN ISSUES/LIMITATIONS:
 -------------------------
-None
+-When the number of users scales to a very large number, it will slow down the system.(It can be upgraded and optimized later)
+
+-The encryption algorithm is not as good as SHA-256.(It can be upgraded and optimized later)
 
 ADDITIONAL NOTES:
 -----------------
