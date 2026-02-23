@@ -1,62 +1,35 @@
-========================================
-C/C++ Programming Mini Project
-Student Management System
-========================================
+# Student Management System
 
-GROUP INFORMATION:
-------------------
-Group Number: 12
+## 📝 Introduction
+This Student Management System is a terminal-based application developed as part of my coursework at **Ho Chi Minh City International University (HCMIU)**. The project focuses on implementing a modular system to handle academic data efficiently using the **C++** programming language. 
 
-Member 1: Truong Hao Nhien - ITITWE25014
+Unlike complex database systems, this project utilizes **Structured Programming** and custom `struct` definitions to manage data. It demonstrates core programming concepts such as multi-file compilation, pointer/reference management for data manipulation, and persistent storage using CSV files.
 
-Member 2: Phan Quang Tan Loc - ITITWE25009
+---
 
-LANGUAGE USED:
---------------
-C++
+## 📂 Project Structure
 
-COMPILATION INSTRUCTIONS:
--------------------------
-C++:
-1. Open terminal in source/ directory
-2. Run: g++ *.cpp -o studentmanagement
-3. Then run the .exe
-
-Or if using Makefile:
-1. Run: make
-2. Run: ./sms
-
-RUNNING THE PROGRAM:
---------------------
-1. Make sure data/ folder is in the same directory as executable
-2. Run ./studentmanagement (or .exe on Windows).
-3. Login using credentials: admin / 123456.
-4. Select "Exit" from the menu when finished to ensure data is saved.
-
-TEST CREDENTIALS:
------------------
-Teacher:
-- Username: teacher1, Password: tea
-- Username: teacher2, Password: tea
-
-Student:
-- Username: student1, Password: std
-- Username: student2, Password: std
-
-BONUS FEATURES IMPLEMENTED:
----------------------------
-1/ Password Encryption
-
-2/ Advanced Statistics
-
-3/ Rollback data
-
-KNOWN ISSUES/LIMITATIONS:
--------------------------
--When the number of users scales to a very large number, it will slow down the system.(It can be upgraded and optimized later)
-
--The encryption algorithm is not as good as SHA-256.(It can be upgraded and optimized later)
-
-ADDITIONAL NOTES:
------------------
-None
+```text
+MiniProject-StudentManagementSystem
+├── backup_data/            # Safety backups of existing records
+│   ├── bu_enrollment.csv
+│   ├── bu_unit.csv
+│   └── bu_user.csv
+├── data/                   # Active CSV database files
+│   ├── enrollment.csv
+│   ├── unit.csv
+│   └── user.csv
+├── include/                # Header files (.h)
+│   ├── enrollment_management.h
+│   ├── operations.h
+│   ├── struct.h            # Data structures and definitions
+│   ├── unit_management.h
+│   └── user_management.h
+├── source/                 # Implementation files (.cpp)
+│   ├── enrollment_management.cpp
+│   ├── main.cpp
+│   ├── operations.cpp
+│   ├── unit_management.cpp
+│   └── user_management.cpp
+├── .gitignore              # Git exclusion rules
+└── README.md               # Project documentation
